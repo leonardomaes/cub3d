@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-t_cub	*game(void)
+int start_game(void)
 {
-	static t_cub	game;
+	int i;
+	int j;
 
-	return (&game);
-}
-
-int	main(int argc, char *argv[])
-{
-	if (argc == 2)
+	ft_bzero(game()->mlx->addr, WINDOW_WIGTH * WINDOW_HEIGHT * (game()->mlx->bits_per_pixel / 8));
+	i = 0;
+	while (i <= WINDOW_HEIGHT)
 	{
-		init_game(game(), argv[1]);
-		file_check();
-		print_map();
-		setup_hook();
+		j = 0;
+		while (j <= WINDOW_WIGTH)
+		{
+			if (i > (WINDOW_HEIGHT / 2))
+				my_mlx_pixel_put(game(), j, i, ft_atoi_hex(game()->map->texture->ceiling_color));
+			else
+				my_mlx_pixel_put(game(), j, i, ft_atoi_hex(game()->map->texture->floor_color));
+			j++;
+		}
+		i++;
 	}
-	else
-	{
-		ft_printf("ERROR:Wrong number of arguments!\n");
-		exit(1);
-	}
-	clear_all();
+	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win, game()->mlx->img, 0, 0);
 	return (0);
 }

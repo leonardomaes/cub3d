@@ -14,7 +14,9 @@
 
 int	is_texture(char *str)
 {
-	if (!ft_strcmp(str, "NO") || !ft_strcmp(str, "EA") || !ft_strcmp(str, "SO") || !ft_strcmp(str, "WE") || str[0] == '\n')
+	if (!ft_strcmp(str, "NO") || !ft_strcmp(str, "EA")
+		|| !ft_strcmp(str, "SO") || !ft_strcmp(str, "WE")
+		|| str[0] == '\n')
 		return (1);
 	return (0);
 }
@@ -36,7 +38,8 @@ int	have_textures(t_texture *t)
 	int	size;
 
 	size = 0;
-	if (!t || !t->ceiling_color || !t->floor_color || !t->ea_path || !t->no_path || !t->so_path || !t->we_path)
+	if (!t || !t->ceiling_color || !t->floor_color
+		|| !t->ea_path || !t->no_path || !t->so_path || !t->we_path)
 		return (1);
 	size = ft_strlen(t->ea_path);
 	if (ft_strncmp(t->ea_path + (size - 4), ".xpm", 4) != 0)
@@ -62,7 +65,8 @@ int	is_map(char	*line)
 		return (1);
 	while (line[j])
 	{
-		if ((line[j] != '1' && line[j] != '0' && !ft_isspace(line[j]) && !is_player(line[j])))
+		if ((line[j] != '1' && line[j] != '0' && !ft_isspace(line[j])
+				&& !is_player(line[j])))
 			return (1);
 		j++;
 	}

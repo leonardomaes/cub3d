@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:01:08 by lmaes             #+#    #+#             */
-/*   Created: 2025/05/03 19:01:10 by lmaes            ###   ########.fr       */
+/*   Created: 2025/03/12 19:35:08 by lmaes             #+#    #+#             */
+/*   Updated: 2025/03/12 19:35:10 by lmaes            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ int	check_middle(char **content, int *j)
 		i = 0;
 		while (content[*j][i])
 		{
-			if (i == 0 && (content[*j][i] != '1' && !ft_isspace(content[*j][i])))
+			if (i == 0 && (content[*j][i] != '1'
+				&& !ft_isspace(content[*j][i])))
 				return (1);
-			if (content[*j][i+1] == '\n' && content[*j][i] != '1')
+			if (content[*j][i + 1] == '\n'
+				&& content[*j][i] != '1')
 				return (1);
 			if (is_player(content[*j][i]))
 				player++;
@@ -114,7 +116,7 @@ int	check_map_conditions(char **content, int *i)
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
-	if (content[j])		// Nunca chega nesta condição (Adicionada para ver se há mais linhas após o mapa)
+	if (content[j])
 		return (1);
 	return (0);
 }

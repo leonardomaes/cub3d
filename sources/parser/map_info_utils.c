@@ -14,16 +14,16 @@
 
 unsigned int	rgb_to_hex(int r, int g, int b)
 {
-	return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
-int		get_hexa_color(t_map *map, char *fc)
+int	get_hexa_color(t_map *map, char *fc)
 {
 	char	hexa[] = "0123456789ABCDEF";
 	char	hexa_str[11];
 	int		value;
 	int		i;
-	
+
 	if (!fc)
 		return (1);
 	if (!ft_strcmp(fc, "F\0"))

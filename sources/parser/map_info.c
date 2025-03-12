@@ -47,16 +47,16 @@ int	get_textures(t_map *map, char *line, int *i)
 
 int	set_floor(t_map *map, char *fc, char *rgb)
 {
-	int		i;
-	int		j;
-	unsigned int		nbr;
-	char	**temp;
+	int				i;
+	int				j;
+	unsigned int	nbr;
+	char			**temp;
 
 	if (!fc || !rgb)
 		return (1);
 	temp = ft_split(rgb, ',');
 	i = 0;
-	while (temp[i]) // Verificar se são todos numeros
+	while (temp[i])
 	{
 		j = 0;
 		while (temp[i][j])
@@ -94,7 +94,7 @@ int	get_floor(t_map *map, char *line, int *i)
 	if (set_floor(map, floor[0], rgb) == 1)
 		return (free(rgb), free_split(floor), 1);
 	if (get_hexa_color(map, floor[0]) == 1)
-	return (free(rgb), free_split(floor), 1);
+		return (free(rgb), free_split(floor), 1);
 	free(rgb);
 	free_split(floor);
 	(*i)++;

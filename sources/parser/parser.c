@@ -75,7 +75,6 @@ void	read_map(void)
 {
 	int		lines;
 
-
 	lines = count_lines();
 	if (lines == 0)
 		ft_exit("ERROR: Empty file!\n", 1);
@@ -86,9 +85,9 @@ void	read_map(void)
 	parse_map(game()->map, game()->map->layout);
 }
 
-int file_check(void)
+int	file_check(void)
 {
-	int size;
+	int	size;
 
 	size = ft_strlen(game()->filename);
 	if (ft_strncmp(game()->filename + (size - 4), ".cub", 4) != 0)

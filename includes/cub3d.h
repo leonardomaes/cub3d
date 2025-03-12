@@ -30,7 +30,6 @@
 # include <string.h>
 # include <unistd.h>
 
-
 /***********************************************/
 /*					Defines						*/
 /***********************************************/
@@ -60,14 +59,14 @@ typedef struct s_mlx
 	void	*win;
 }				t_mlx;
 
-typedef	struct s_texture
+typedef struct s_texture
 {
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*floor_color;
-	char	*ceiling_color;
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	char			*floor_color;
+	char			*ceiling_color;
 	unsigned int	floor;
 	unsigned int	ceiling;
 }				t_texture;
@@ -105,9 +104,15 @@ void			free_split(char **data);
 
 // UTILS
 int				check_key(int keysym);
+void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			init_game(t_cub	*cub, const char *filename);
 void			init_mlx(t_cub *cub, const char *filename);
 void			setup_hook(void);
+
+// Trash
+void			print_map(void);
+
+/******************* PARSER **********************/
 
 // Parser
 int				file_check(void);
@@ -129,8 +134,6 @@ int				have_textures(t_texture *t);
 int				is_map(char	*line);
 int				check_top_bottom(char *line);
 
-
-
 // Map info
 int				get_textures(t_map *map, char *line, int *i);
 int				get_floor(t_map *map, char *line, int *i);
@@ -139,15 +142,9 @@ int				get_floor(t_map *map, char *line, int *i);
 unsigned int	rgb_to_hex(int r, int g, int b);
 int				get_hexa_color(t_map *map, char *fc);
 
-// Utils
-int				check_key(int keysym);
-void			init_mlx(t_cub *cub, const char *filename);
-void			init_game(t_cub	*cub, const char *filename);
-void			setup_hook(void);
+/******************* RENDER **********************/
 
-
-
-// Trash
-void			print_map(void);
+// Render
+int				start_game(void);
 
 #endif
