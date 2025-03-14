@@ -21,7 +21,6 @@
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 # include "mlx/mlx.h"
-# include "mlx/mlx_int.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
@@ -38,7 +37,7 @@
 # define WINDOW_WIGTH 1280
 # define WINDOW_HEIGHT 720
 
-// Colors
+// COLORS
 # define RED_PIXEL 0xFF0000
 # define BLUE_PIXEL 0x0000FF
 # define GREEN_PIXEL 0x00FF00
@@ -91,10 +90,10 @@ typedef struct s_cub
 /*				Declarations					*/
 /***********************************************/
 
-// MAIN
+// Main
 t_cub			*game(void);
 
-// FREE
+// Free
 void			clear_mlx(t_mlx *mlx);
 void			clear_map(void);
 void			clear_all(void);
@@ -102,7 +101,7 @@ int				kill_all(void);
 void			ft_exit(char *msg, int exit_code);
 void			free_split(char **data);
 
-// UTILS
+// Utils
 int				check_key(int keysym);
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			init_game(t_cub	*cub, const char *filename);
