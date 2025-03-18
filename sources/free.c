@@ -37,8 +37,6 @@ void	clear_map(void)
 				free(game()->map->layout[i++]);
 			if (game()->map->texture)
 			{
-				free(game()->map->texture->ceiling_color);
-				free(game()->map->texture->floor_color);
 				free(game()->map->texture->ea_path);
 				free(game()->map->texture->no_path);
 				free(game()->map->texture->so_path);

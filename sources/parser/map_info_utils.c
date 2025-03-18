@@ -12,11 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
-unsigned int	rgb_to_hex(int r, int g, int b)
+unsigned int	get_rgb(int r, int g, int b)
 {
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
-
+/* 
 int	get_hexa_color(t_map *map, char *fc)
 {
 	char	hexa[] = "0123456789ABCDEF";
@@ -46,3 +46,4 @@ int	get_hexa_color(t_map *map, char *fc)
 		map->texture->ceiling_color = ft_strdup(hexa_str);
 	return (0);
 }
+ */

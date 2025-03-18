@@ -93,5 +93,6 @@ int	file_check(void)
 	if (ft_strncmp(game()->filename + (size - 4), ".cub", 4) != 0)
 		ft_exit("ERROR:File specified in wrong format!\n", 1);
 	read_map();
+	
 	return (0);
 }

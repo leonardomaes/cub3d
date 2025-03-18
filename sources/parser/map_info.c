@@ -69,7 +69,7 @@ int	set_floor(t_map *map, char *fc, char *rgb)
 	}
 	if (i != 3)
 		return (free_split(temp), 1);
-	nbr = rgb_to_hex(ft_atoi(temp[0]), ft_atoi(temp[1]), ft_atoi(temp[2]));
+	nbr = get_rgb(ft_atoi(temp[0]), ft_atoi(temp[1]), ft_atoi(temp[2]));
 	if (!ft_strcmp(fc, "F\0") && map->texture->floor == 0)
 		map->texture->floor = nbr;
 	else if (!ft_strcmp(fc, "C\0") && map->texture->ceiling == 0)
@@ -92,8 +92,6 @@ int	get_floor(t_map *map, char *line, int *i)
 		return (1);
 	rgb = ft_chartrim(floor[1], '\n');
 	if (set_floor(map, floor[0], rgb) == 1)
-		return (free(rgb), free_split(floor), 1);
-	if (get_hexa_color(map, floor[0]) == 1)
 		return (free(rgb), free_split(floor), 1);
 	free(rgb);
 	free_split(floor);

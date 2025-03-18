@@ -48,6 +48,18 @@
 /*					Structs						*/
 /***********************************************/
 
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}				t_pos;
+
+typedef struct s_player
+{
+	t_pos	pos;
+}				t_player;
+
+
 typedef struct s_mlx
 {
 	void	*img;
@@ -65,8 +77,6 @@ typedef struct s_texture
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
-	char			*floor_color;
-	char			*ceiling_color;
 	unsigned int	floor;
 	unsigned int	ceiling;
 }				t_texture;
@@ -83,6 +93,7 @@ typedef struct s_map
 typedef struct s_cub
 {
 	char		*filename;
+	t_player	*player;
 	t_map		*map;
 	t_mlx		*mlx;
 }				t_cub;
@@ -93,6 +104,9 @@ typedef struct s_cub
 
 // MAIN
 t_cub			*game(void);
+
+// LOAD
+void			load(void);
 
 // FREE
 void			clear_mlx(t_mlx *mlx);
@@ -139,7 +153,7 @@ int				get_textures(t_map *map, char *line, int *i);
 int				get_floor(t_map *map, char *line, int *i);
 
 // Map info utils
-unsigned int	rgb_to_hex(int r, int g, int b);
+unsigned int	get_rgb(int r, int g, int b);
 int				get_hexa_color(t_map *map, char *fc);
 
 /******************* RENDER **********************/

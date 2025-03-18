@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2024/07/11 12:52:10 by lmaes            ###   ########.fr       */
+/*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
+/*   Updated: 2025/03/13 12:52:10 by lmaes            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int start_game(void)
 		while (j <= WINDOW_WIGTH)
 		{
 			if (i > (WINDOW_HEIGHT / 2))
-				my_mlx_pixel_put(game(), j, i, ft_atoi_hex(game()->map->texture->ceiling_color));
+				my_mlx_pixel_put(game(), j, i, game()->map->texture->ceiling);
 			else
-				my_mlx_pixel_put(game(), j, i, ft_atoi_hex(game()->map->texture->floor_color));
+				my_mlx_pixel_put(game(), j, i, game()->map->texture->floor);
 			j++;
 		}
 		i++;

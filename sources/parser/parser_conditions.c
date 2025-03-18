@@ -15,8 +15,6 @@
 void	init_textures(t_map *map)
 {
 	map->texture = (t_texture *)malloc(sizeof(t_texture));
-	map->texture->ceiling_color = NULL;
-	map->texture->floor_color = NULL;
 	map->texture->ceiling = 0;
 	map->texture->floor = 0;
 	map->texture->ea_path = NULL;

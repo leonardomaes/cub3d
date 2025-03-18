@@ -22,12 +22,11 @@ void	print_map(void)
 		printf("%s", game()->map->layout[i++]);
 	printf("------------END---------------\n");
 	printf("\n");
-	printf("Ceiling:%s\n", game()->map->texture->ceiling_color);
-	printf("Floor:%s\n", game()->map->texture->floor_color);
+	printf("C: %d\n", game()->map->texture->ceiling);
+	printf("F: %d\n", game()->map->texture->floor);
 	printf("NO:%s\n", game()->map->texture->no_path);
 	printf("SO:%s\n", game()->map->texture->so_path);
 	printf("EA:%s\n", game()->map->texture->ea_path);
 	printf("WE:%s\n", game()->map->texture->we_path);
 	printf("\n");
-	
 }
