@@ -35,7 +35,7 @@
 /***********************************************/
 
 // WINDOW SETTINGS
-# define WINDOW_WIGTH 1280
+# define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
 
 // Colors
@@ -84,8 +84,8 @@ typedef struct s_texture
 typedef struct s_map
 {
 	char		**layout;		// info lido do file
-	int			width;
-	int			height;
+	int			max_x;
+	int			max_y;
 	char		**map;
 	t_texture	*texture;	// info das texturas
 }				t_map;
@@ -93,7 +93,7 @@ typedef struct s_map
 typedef struct s_cub
 {
 	char		*filename;
-	t_player	*player;
+	t_player	player;
 	t_map		*map;
 	t_mlx		*mlx;
 }				t_cub;
@@ -137,7 +137,6 @@ int				count_lines(void);
 // Parser Conditions
 void			parse_map(t_map *map, char	**content);
 int				check_textures(t_map *map, char **content, int *i);
-int				is_map(char	*line);
 int				is_player(char c);
 int				is_texture(char *str);
 int				is_floor(char *str);
@@ -145,7 +144,8 @@ int				is_floor(char *str);
 // Parser Utils
 int				is_player(char c);
 int				have_textures(t_texture *t);
-int				is_map(char	*line);
+int				is_map_line(char	*line);
+int				is_map(char c);
 int				check_top_bottom(char *line);
 
 // Map info

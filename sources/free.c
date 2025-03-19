@@ -35,6 +35,9 @@ void	clear_map(void)
 		{
 			while (game()->map->layout[i])
 				free(game()->map->layout[i++]);
+			i = 0;
+			while (game()->map->map[i])
+				free(game()->map->map[i++]);
 			if (game()->map->texture)
 			{
 				free(game()->map->texture->ea_path);
@@ -44,6 +47,7 @@ void	clear_map(void)
 				free(game()->map->texture);
 			}
 			free(game()->map->layout);
+			free(game()->map->map);
 		}
 		free(game()->map);
 	}

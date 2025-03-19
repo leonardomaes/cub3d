@@ -17,12 +17,12 @@ int start_game(void)
 	int i;
 	int j;
 
-	ft_bzero(game()->mlx->addr, WINDOW_WIGTH * WINDOW_HEIGHT * (game()->mlx->bits_per_pixel / 8));
+	ft_bzero(game()->mlx->addr, WINDOW_WIDTH * WINDOW_HEIGHT * (game()->mlx->bits_per_pixel / 8));
 	i = 0;
 	while (i <= WINDOW_HEIGHT)
 	{
 		j = 0;
-		while (j <= WINDOW_WIGTH)
+		while (j <= WINDOW_WIDTH)
 		{
 			if (i > (WINDOW_HEIGHT / 2))
 				my_mlx_pixel_put(game(), j, i, game()->map->texture->ceiling);

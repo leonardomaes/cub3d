@@ -45,7 +45,7 @@ int	check_textures(t_map *map, char **content, int *i)
 		else
 			return (free_split(wall), 1);
 		temp = ft_chartrim(content[*i], '\n');
-		if (is_map(temp) == 0 && content[*i][0] != '\n')
+		if (is_map_line(temp) == 0 && content[*i][0] != '\n')
 		{
 			free_split(wall);
 			free(temp);
@@ -66,7 +66,7 @@ int	check_valid_chars(char **content)
 	j = 1;
 	while (content[j])
 	{
-		if (is_map(content[j]) == 1)
+		if (is_map_line(content[j]) == 1)
 			return (1);
 		j++;
 	}
@@ -76,28 +76,43 @@ int	check_valid_chars(char **content)
 int	check_middle(char **content, int *j)
 {
 	int	player;
-	int	i;
+	int	x;
+	int y;
+	int	max_width;
 
 	player = 0;
-	while (is_map(content[*j + 1]) == 0 && content[*j + 1][0] != '\n')
+	y = 0;
+	max_width = 0;
+	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
 	{
-		i = 0;
-		while (content[*j][i])
+		x = 0;
+		while (content[y][x])
 		{
-			if (i == 0 && (content[*j][i] != '1'
-				&& !ft_isspace(content[*j][i])))
+			if (x == 0 && (content[y][x] != '1'
+				&& !ft_isspace(content[y][x])))
 				return (1);
-			if (content[*j][i + 1] == '\n'
-				&& content[*j][i] != '1')
+			if (content[y][x + 1] == '\n'
+				&& content[y][x] != '1')
 				return (1);
-			if (is_player(content[*j][i]))
+			if (content[y][x] == '0' && (is_map(content[y-1][x]) == 1 || is_map(content[y+1][x]) == 1))
+				return (1);
+			if (is_player(content[y][x]))
+			{
 				player++;
-			i++;
+				game()->player.pos.x = x + 1;
+				game()->player.pos.y = y + 2;
+			}
+			x++;
 		}
-		(*j)++;
+		if (x > max_width)
+			max_width = x;
+		y++;
 	}
 	if (player != 1)
 		return (1);
+	game()->map->max_x = max_width;
+	game()->map->max_y = y + 2;
+	*j += y;
 	return (0);
 }
 
@@ -109,7 +124,7 @@ int	check_map_conditions(char **content, int *i)
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
-	if (check_middle(content, &j) == 1)
+	if (check_middle(content + j, &j) == 1)	// J = Y
 		return (1);
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
@@ -128,6 +143,21 @@ int	check_map(char	**content, int *i)
 	return (0);
 }
 
+void	get_map(t_map	*map, char **content, int i)
+{
+	int	j;
+
+	map->map = (char **)malloc(sizeof(char *) * (game()->map->max_y + 1));
+	j = 0;
+	while (content[i])
+	{
+		map->map[j] = ft_strdup(content[i]);
+		j++;
+		i++;
+	}
+	map->map[j] = NULL;
+}
+
 void	parse_map(t_map *map, char	**content)
 {
 	int	i;
@@ -139,4 +169,5 @@ void	parse_map(t_map *map, char	**content)
 		ft_exit("Missing textures or in wrong format\n", 1);
 	if (check_map(content, &i) == 1)
 		ft_exit("Map in wrong format\n", 1);
+	get_map(map, content, i);
 }

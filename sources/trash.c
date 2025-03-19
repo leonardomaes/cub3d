@@ -28,5 +28,9 @@ void	print_map(void)
 	printf("SO:%s\n", game()->map->texture->so_path);
 	printf("EA:%s\n", game()->map->texture->ea_path);
 	printf("WE:%s\n", game()->map->texture->we_path);
+	printf("Height Y:%d\n", game()->map->max_y);
+	printf("Width  X:%d\n", game()->map->max_x);
+	printf("Player X:%f\n", game()->player.pos.x);
+	printf("Player Y:%f\n", game()->player.pos.y);
 	printf("\n");
 }

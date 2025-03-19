@@ -56,7 +56,14 @@ int	have_textures(t_texture *t)
 	return (0);
 }
 
-int	is_map(char	*line)
+int	is_map(char c)
+{
+	if (!c || c == '0' || c == '1')
+		return (0);
+	return (1);
+}
+
+int	is_map_line(char	*line)
 {
 	int	j;
 

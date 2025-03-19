@@ -46,9 +46,9 @@ void	init_mlx(t_cub *cub, const char *filename)
 	cub->filename = (char *)filename;
 	title = ft_strjoin("cub3D - ", filename);
 	cub->mlx->win = mlx_new_window(cub->mlx->mlx,
-			WINDOW_WIGTH, WINDOW_HEIGHT, title);
+			WINDOW_WIDTH, WINDOW_HEIGHT, title);
 	free(title);
-	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WINDOW_WIGTH, WINDOW_HEIGHT);
+	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	cub->mlx->addr = mlx_get_data_addr(cub->mlx->img, &cub->mlx->bits_per_pixel,
 			&cub->mlx->line_length, &cub->mlx->endian);
 }
