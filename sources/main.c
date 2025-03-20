@@ -6,11 +6,26 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/20 19:08:29 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:56:56 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+/*
+static void debug_map(void)
+{
+	int i = 0; 
+
+	printf("--------MAP BEGIN------------\n");
+	while (game()->map->map[i])
+	{
+		printf("%s", game()->map->map[i]);
+		i++;
+	}
+	printf("--------MAP END------------\n");
+}
+*/
 
 t_cub	*game(void)
 {
@@ -28,7 +43,8 @@ int	main(int argc, char *argv[])
 		// load();
 		print_map();
 		setup_hook();
-		draw_minimap(game());
+		//debug_map();
+		
 	}
 	else
 	{

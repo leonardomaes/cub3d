@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/13 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/20 19:29:43 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int start_game(void)
 		}
 		i++;
 	}
+	draw_minimap(game());
 	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win, game()->mlx->img, 0, 0);
 	return (0);
 }
