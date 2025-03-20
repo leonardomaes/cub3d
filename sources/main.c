@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2024/07/11 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/20 19:08:29 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char *argv[])
 		// load();
 		print_map();
 		setup_hook();
+		draw_minimap(game());
 	}
 	else
 	{

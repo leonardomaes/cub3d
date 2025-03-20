@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/02/27 12:49:43 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/20 18:55:38 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 
 /***********************************************/
-/*					Defines						*/
+/*					Defines					   */
 /***********************************************/
 
 // WINDOW SETTINGS
@@ -44,8 +44,11 @@
 # define GREEN_PIXEL 0x00FF00
 # define WHITE_PIXEL 0xFFFFFF
 
+// Minima
+# define MINIMAP_SCALE 5
+
 /***********************************************/
-/*					Structs						*/
+/*					Structs					   */
 /***********************************************/
 
 typedef struct s_pos
@@ -128,7 +131,7 @@ void			print_map(void);
 
 /******************* PARSER **********************/
 
-// Parser
+// Parservoid render_minimap_layout(int x, int y)
 int				file_check(void);
 void			read_map(void);
 char			**read_lines(int lines);
@@ -160,5 +163,10 @@ int				get_hexa_color(t_map *map, char *fc);
 
 // Render
 int				start_game(void);
+
+/******************* MINIMAP **********************/
+
+// Minimap
+void 			draw_minimap(t_cub *cub); 
 
 #endif
