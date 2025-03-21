@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/10 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/21 01:42:01 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,49 @@ int	check_top_bottom(char *line)
 	}
 	return (0);
 }
+
+int extract_map_data(t_map *map)
+{
+	int	i;
+	int	j;
+	int	map_lines;
+
+	// count how many map lines the map have
+	i = 0;
+	map_lines = 0;
+	while (map->layout[i])
+	{
+		if (is_map(map->layout[i]) == 0)
+			map_lines++;
+		i++;
+	}
+
+	// Allocate memory
+	map->map = (char **)malloc(sizeof(char *) * (map_lines + 1));
+	if (!map->map)
+		ft_exit("ERROR: Memory allocation failed!\n", 1);
+
+	// Copy the map lines
+	i = 0;
+	j = 0;
+	while (map->layout[i])
+	{
+		if (is_map(map->layout[i]) == 0)
+		{
+			map->map[j] = ft_strdup(map->layout[i]);
+			if (!map->map[j])
+			{
+				// Clean up if strdup fails
+				while (j > 0)
+					free(map->map[--j]);
+				free(map->map);
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	map->map[j] = NULL;
+	return (0);
+}
+

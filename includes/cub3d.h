@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/20 18:55:38 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:29:05 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int				get_floor(t_map *map, char *line, int *i);
 // Map info utils
 unsigned int	get_rgb(int r, int g, int b);
 int				get_hexa_color(t_map *map, char *fc);
+int 			extract_map_data(t_map *map);
 
 /******************* RENDER **********************/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_conditions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:35:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/12 19:35:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/21 01:24:25 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,5 @@ void	parse_map(t_map *map, char	**content)
 		ft_exit("Missing textures or in wrong format\n", 1);
 	if (check_map(content, &i) == 1)
 		ft_exit("Map in wrong format\n", 1);
+	extract_map_data(map);
 }

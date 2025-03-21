@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:40:11 by rda-cunh          #+#    #+#             */
-/*   Updated: 2025/03/20 20:00:00 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:30:21 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void draw_minimap(t_cub *cub)
     int y;
     
     y = 0;
-    while (cub->map->layout[y])
+    while (cub->map->map[y])
     {
         x = 0;
-        while (cub->map->layout[y][x])
+        while (cub->map->map[y][x])
         {
-            if (cub->map->layout[y][x] == '1')
+            if (cub->map->map[y][x] == '1')
                 draw_square(cub, x * 10, y * 10, 0x000000); // Black for walls
-            else if (cub->map->layout[y][x] == '0')
+            else if (cub->map->map[y][x] == '0')
                 draw_square(cub, x * 10, y * 10, 0xAAAAAA); // Gray for floor
-            else if (cub->map->layout[y][x] == 'N') 
+            else if (cub->map->map[y][x] == 'N') 
                 draw_square(cub, x * 10, y * 10, 0xFF0000); // Red for the player
             x++;
         }
