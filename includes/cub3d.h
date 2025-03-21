@@ -43,6 +43,21 @@
 # define BLUE_PIXEL 0x0000FF
 # define GREEN_PIXEL 0x00FF00
 # define WHITE_PIXEL 0xFFFFFF
+# define BLACK_PIEXL 0x000000
+# define GRAY_PIXEL 0xAAAAAA
+
+// MAP SETTINGS
+# define MAP_SCALE 0.3
+
+// MAP
+# define WALL 1
+# define FLOOR 2
+# define BLANK 3
+# define PLAYER_NO 4
+# define PLAYER_SO 5
+# define PLAYER_EA 6
+# define PLAYER_WE 7
+# define INVALID_CHAR 8
 
 /***********************************************/
 /*					Structs						*/
@@ -56,6 +71,7 @@ typedef struct s_pos
 
 typedef struct s_player
 {
+	double	rotation;
 	t_pos	pos;
 }				t_player;
 
@@ -86,6 +102,9 @@ typedef struct s_map
 	char		**layout;		// info lido do file
 	int			max_x;
 	int			max_y;
+	double		offset_x;
+	double		offset_y;
+	int			**int_map;
 	char		**map;
 	t_texture	*texture;	// info das texturas
 }				t_map;
@@ -107,6 +126,9 @@ t_cub			*game(void);
 
 // LOAD
 void			load(void);
+
+// MINIMAP
+void			start_map(void);
 
 // FREE
 void			clear_mlx(t_mlx *mlx);

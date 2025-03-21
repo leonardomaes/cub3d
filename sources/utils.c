@@ -12,15 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-int	check_key(int keysym)
-{
-	if (keysym == XK_Escape)
-	{
-		kill_all();
-	}
-	return (0);
-}
-
 void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 {
 	char	*dst;
@@ -56,6 +47,7 @@ void	init_mlx(t_cub *cub, const char *filename)
 void	init_game(t_cub	*cub, const char *filename)
 {
 	init_mlx(cub, filename);
+	game()->player.rotation = 1;
 }
 
 void	setup_hook(void)
