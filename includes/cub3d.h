@@ -156,19 +156,27 @@ void			read_map(void);
 char			**read_lines(int lines);
 int				count_lines(void);
 
-// Parser Conditions
-void			parse_map(t_map *map, char	**content);
+// Check Map
 int				check_textures(t_map *map, char **content, int *i);
-int				is_player(char c);
-int				is_texture(char *str);
-int				is_floor(char *str);
+int				check_top_bottom(char *line);
+int				check_middle(char **content, int *j);
+int				check_map_conditions(char **content, int *i);
+int				check_valid_chars(char **content);
+
+// Parser Conditions
+void			init_map(t_map *map);
+int				check_map(char	**content, int *i);
+void			get_map2(t_map	*map, char **content, int i);
+void			get_map(t_map	*map, char **content, int i);
+void			parse_map(t_map *map, char	**content);
 
 // Parser Utils
+int				is_texture(char *str);
+int				is_floor(char *str);
 int				is_player(char c);
 int				have_textures(t_texture *t);
-int				is_map_line(char	*line);
 int				is_map(char c);
-int				check_top_bottom(char *line);
+int				is_map_line(char	*line);
 
 // Map info
 int				get_textures(t_map *map, char *line, int *i);

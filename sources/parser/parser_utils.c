@@ -58,7 +58,7 @@ int	have_textures(t_texture *t)
 
 int	is_map(char c)
 {
-	if (!c || c == '0' || c == '1')
+	if (!c || c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'S' || c == 'W')
 		return (0);
 	return (1);
 }
@@ -74,20 +74,6 @@ int	is_map_line(char	*line)
 	{
 		if ((line[j] != '1' && line[j] != '0' && !ft_isspace(line[j])
 				&& !is_player(line[j])))
-			return (1);
-		j++;
-	}
-	return (0);
-}
-
-int	check_top_bottom(char *line)
-{
-	int	j;
-
-	j = 0;
-	while (line[j] != '\0')
-	{
-		if (line[j] != '1' && !ft_isspace(line[j]))
 			return (1);
 		j++;
 	}

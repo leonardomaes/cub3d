@@ -28,30 +28,36 @@ void	clear_map(void)
 {
 	int	i;
 
-	i = 0;
 	if (game()->map)
 	{
 		if (game()->map->layout)
 		{
+			i = 0;
 			while (game()->map->layout[i])
 				free(game()->map->layout[i++]);
+			free(game()->map->layout);
+		}
+		if (game()->map->map)
+		{
 			i = 0;
 			while (game()->map->map[i])
 				free(game()->map->map[i++]);
+			free(game()->map->map);
+		}
+		if (game()->map->int_map)
+		{
 			i = 0;
 			while (game()->map->int_map[i])
 				free(game()->map->int_map[i++]);
-			if (game()->map->texture)
-			{
-				free(game()->map->texture->ea_path);
-				free(game()->map->texture->no_path);
-				free(game()->map->texture->so_path);
-				free(game()->map->texture->we_path);
-				free(game()->map->texture);
-			}
-			free(game()->map->layout);
 			free(game()->map->int_map);
-			free(game()->map->map);
+		}
+		if (game()->map->texture)
+		{
+			free(game()->map->texture->ea_path);
+			free(game()->map->texture->no_path);
+			free(game()->map->texture->so_path);
+			free(game()->map->texture->we_path);
+			free(game()->map->texture);
 		}
 		free(game()->map);
 	}

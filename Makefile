@@ -12,7 +12,7 @@ PRINTF = includes/ft_printf/libftprintf.a
 #
 SRC =	sources/main.c sources/load.c sources/free.c sources/utils.c sources/trash.c \
 		sources/parser/parser.c sources/parser/parser_utils.c sources/parser/parser_conditions.c \
-		sources/parser/map_info.c sources/parser/map_info_utils.c \
+		sources/parser/map_info.c sources/parser/check_map.c sources/parser/map_info_utils.c \
 		sources/render/render.c \
 		sources/raycast/raycast.c \
 		sources/movement/movement.c \

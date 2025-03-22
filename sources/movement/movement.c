@@ -35,7 +35,6 @@ void	do_key(int key)
 			game()->player.rotation += 1;
 		printf("%f\n", game()->player.rotation);
 	}
-	
 }
 
 int check_key(int keysym)
