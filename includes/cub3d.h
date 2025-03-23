@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/02/27 12:49:43 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define BLUE_PIXEL 0x0000FF
 # define GREEN_PIXEL 0x00FF00
 # define WHITE_PIXEL 0xFFFFFF
-# define BLACK_PIEXL 0x000000
+# define BLACK_PIXEL 0x000000
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
@@ -74,7 +74,6 @@ typedef struct s_player
 	double	rotation;
 	t_pos	pos;
 }				t_player;
-
 
 typedef struct s_mlx
 {
