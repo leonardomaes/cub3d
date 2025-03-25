@@ -16,6 +16,34 @@ unsigned int	get_rgb(int r, int g, int b)
 {
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
+
+void	init_player(char p, int x, int y)
+{
+	game()->player.pos.x = x + 0.5;
+	game()->player.pos.y = y + 1.5;
+	if (p == 'N')
+	{
+		game()->player.dir.x = 0;
+		game()->player.dir.y = 1;
+	}
+	else if (p == 'S')
+	{
+		game()->player.dir.x = 0;
+		game()->player.dir.y = -1;
+	}
+	else if (p == 'W')
+	{
+		game()->player.dir.x = -1;
+		game()->player.dir.y = 0;
+	}
+	else if (p == 'E')
+	{
+		game()->player.dir.x = 1;
+		game()->player.dir.y = 0;
+	}
+	
+}
+
 /* 
 int	get_hexa_color(t_map *map, char *fc)
 {

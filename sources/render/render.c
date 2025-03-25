@@ -17,6 +17,7 @@ void	start_floors(void)
 	int	i;
 	int	j;
 
+	ft_bzero(game()->mlx->addr, WINDOW_WIDTH * WINDOW_HEIGHT * (game()->mlx->bits_per_pixel / 8));
 	i = 0;
 	while (i <= WINDOW_HEIGHT)
 	{
@@ -35,7 +36,7 @@ void	start_floors(void)
 
 int start_game(void)
 {
-	ft_bzero(game()->mlx->addr, WINDOW_WIDTH * WINDOW_HEIGHT * (game()->mlx->bits_per_pixel / 8));
+	load();
 	start_floors();
 	start_map();
 	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win, game()->mlx->img, 0, 0);

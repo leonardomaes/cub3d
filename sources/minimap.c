@@ -6,11 +6,20 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:40:11 by rda-cunh          #+#    #+#             */
-/*   Updated: 2025/03/23 23:42:50 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:30:21 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	player(int flag)
+{
+	if (flag == PLAYER_Y)
+		return (game()->player.pos.y * (game()->map->offset_y * MAP_SCALE));
+	else if (flag == PLAYER_X)
+		return (game()->player.pos.x * (game()->map->offset_x * MAP_SCALE));
+	return (0);
+}
 
 static void	draw_player(void)
 {
@@ -19,21 +28,20 @@ static void	draw_player(void)
 	double	offsize_x;
 	double	offsize_y;
 
-	offsize_x = game()->player.pos.x * ((WINDOW_WIDTH / game()->map->max_x)
-			* MAP_SCALE);
-	offsize_y = game()->player.pos.y * ((WINDOW_HEIGHT / game()->map->max_y)
-			* MAP_SCALE);
-	y = -5;
-	while (y < 5)
+	offsize_x = game()->player.pos.x * (game()->map->offset_x * MAP_SCALE);
+	offsize_y = game()->player.pos.y * (game()->map->offset_y * MAP_SCALE);
+	y = -3;
+	while (y < 3)
 	{
-		x = -5;
-		while (x < 5)
+		x = -3;
+		while (x < 3)
 		{
 			my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, RED_PIXEL);
 			x++;
 		}
 		y++;
 	}
+	draw_dda(player(PLAYER_X), player(PLAYER_Y), player(PLAYER_X) + (cos(get_radian(game()->player.rotation)) + 10), player(PLAYER_Y) + (sin(get_radian(game()->player.rotation) + 10)));
 }
 
 void	draw_square(int i, int j)
@@ -43,21 +51,19 @@ void	draw_square(int i, int j)
 	double	offsize_x;
 	double	offsize_y;
 
-	offsize_x = j * ((WINDOW_WIDTH / game()->map->max_x) * MAP_SCALE);
-	offsize_y = i * ((WINDOW_HEIGHT / game()->map->max_y) * MAP_SCALE);
+	offsize_x = j * (game()->map->offset_x * MAP_SCALE);
+	offsize_y = i * (game()->map->offset_y * MAP_SCALE);
 	y = 1;
 	while (y < (MAP_SCALE * 100))
 	{
 		x = 1;
 		while (x < (MAP_SCALE * 100))
 		{
-			if (game()->map->map[i][j] == '1'
-				|| game()->map->int_map[i][j] == ' ')
-				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y,
-					BLACK_PIXEL);
-			else if (game()->map->map[i][j] == '0')
-				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y,
-					GRAY_PIXEL);
+			if (game()->map->map[i][j] == '1' || game()->map->int_map[i][j] == ' ')
+				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, BLACK_PIXEL);
+			else if (game()->map->map[i][j] == '0' || is_player(game()->map->map[i][j]))
+				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, GRAY_PIXEL);
+			
 			x++;
 		}
 		y++;

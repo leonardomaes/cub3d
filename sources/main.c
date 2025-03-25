@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	{
 		init_game(game(), argv[1]);
 		file_check();
-		// load();
+		load();
 		print_map();
 		setup_hook();
 	}

@@ -47,9 +47,13 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
+# define MOVE_SPEED 0.05
 # define MAP_SCALE 0.3
+# define PLAYER_Y 1
+# define PLAYER_X 2
 
 // MAP
+# define PI 3.14159265
 # define WALL 1
 # define FLOOR 2
 # define BLANK 3
@@ -72,6 +76,7 @@ typedef struct s_pos
 typedef struct s_player
 {
 	double	rotation;
+	t_pos	dir;
 	t_pos	pos;
 }				t_player;
 
@@ -125,6 +130,8 @@ t_cub			*game(void);
 
 // LOAD
 void			load(void);
+void			draw_dda(int X0, int Y0, int X1, int Y1);
+double			get_radian(int angle);
 
 // MINIMAP
 void			start_map(void);
@@ -138,7 +145,6 @@ void			ft_exit(char *msg, int exit_code);
 void			free_split(char **data);
 
 // UTILS
-int				check_key(int keysym);
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			init_game(t_cub	*cub, const char *filename);
 void			init_mlx(t_cub *cub, const char *filename);
@@ -183,11 +189,14 @@ int				get_floor(t_map *map, char *line, int *i);
 
 // Map info utils
 unsigned int	get_rgb(int r, int g, int b);
-int				get_hexa_color(t_map *map, char *fc);
+void			init_player(char p, int x, int y);
 
 /******************* RENDER **********************/
 
 // Render
 int				start_game(void);
+
+// Movement
+int				check_key(int keysym);
 
 #endif

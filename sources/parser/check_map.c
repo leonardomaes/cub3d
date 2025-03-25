@@ -83,13 +83,12 @@ int	check_middle(char **content, int *j)
 			if (content[y][x + 1] == '\n'
 				&& content[y][x] != '1')
 				return (1);
-			if (content[y][x] == '0' && is_map(content[y-1][x]) == 1 && is_map(content[y+1][x]) == 1) // Erro por enquanto
+			if (content[y][x] == '0' && (is_map(content[y-1][x]) == 1 || is_map(content[y+1][x]) == 1)) // Erro por enquanto
 				return (1);
 			if (is_player(content[y][x]))
 			{
 				player++;
-				game()->player.pos.x = x + 1.5;
-				game()->player.pos.y = y + 2.5;
+				init_player(content[y][x], x, y);
 			}
 			x++;
 		}
