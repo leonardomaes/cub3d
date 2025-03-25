@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/25 00:41:11 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 // MAP SETTINGS
 # define MAP_SCALE 0.3
 
+// MOVEMENT SETTINGS
+# define MOVE_SPEED 0.05
+
 // MAP
 # define WALL 1
 # define FLOOR 2
@@ -73,6 +76,7 @@ typedef struct s_player
 {
 	double	rotation;
 	t_pos	pos;
+	t_pos	dir;
 }				t_player;
 
 typedef struct s_mlx
@@ -189,5 +193,17 @@ int				get_hexa_color(t_map *map, char *fc);
 
 // Render
 int				start_game(void);
+
+/******************* GAME ********************/
+
+// Movement
+int				is_movement_key(int key);
+int				valid_move(double new_x, double new_y);
+void			move_forward(void);
+void			move_backward(void);
+void			move_left(void);
+void			move_right(void);
+void			handle_movement(int key);
+int				check_key(int keysym);
 
 #endif
