@@ -49,8 +49,10 @@
 // MAP SETTINGS
 # define MOVE_SPEED 0.05
 # define MAP_SCALE 0.3
-# define PLAYER_Y 1
-# define PLAYER_X 2
+# define POS_Y 1
+# define POS_X 2
+# define DIR_Y 3
+# define DIR_X 4
 
 // MAP
 # define PI 3.14159265

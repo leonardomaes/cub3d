@@ -14,10 +14,14 @@
 
 int	player(int flag)
 {
-	if (flag == PLAYER_Y)
+	if (flag == POS_Y)
 		return (game()->player.pos.y * (game()->map->offset_y * MAP_SCALE));
-	else if (flag == PLAYER_X)
+	else if (flag == POS_X)
 		return (game()->player.pos.x * (game()->map->offset_x * MAP_SCALE));
+	else if (flag == DIR_X)
+		return (game()->player.dir.x);
+	else if (flag == DIR_Y)
+		return (game()->player.dir.y);
 	return (0);
 }
 
@@ -41,7 +45,7 @@ static void	draw_player(void)
 		}
 		y++;
 	}
-	draw_dda(player(PLAYER_X), player(PLAYER_Y), player(PLAYER_X) + (cos(get_radian(game()->player.rotation)) + 10), player(PLAYER_Y) + (sin(get_radian(game()->player.rotation) + 10)));
+	draw_dda(player(POS_X), player(POS_Y), player(POS_X) + (player(DIR_X) * 10), player(POS_Y) + (player(DIR_Y) * 10));
 }
 
 void	draw_square(int i, int j)

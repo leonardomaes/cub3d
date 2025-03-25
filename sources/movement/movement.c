@@ -85,24 +85,25 @@ void	move_right(void)
 }
 void	rotate_key(int key)
 {
-	if (key == XK_Left)
+	if (key == XK_Right)
 	{
 		if (game()->player.rotation == 1)
 			game()->player.rotation = 360;
 		else
 			game()->player.rotation -= 1;
-		printf("%f\n", game()->player.rotation);
 	}
-	if (key == XK_Right)
+	if (key == XK_Left)
 	{
 		if (game()->player.rotation == 360)
 			game()->player.rotation = 1;
 		else
 			game()->player.rotation += 1;
-		printf("%f\n", game()->player.rotation);
 	}
+	printf("%f\n", game()->player.rotation);
 	printf("cos: %f\n", cos(get_radian(game()->player.rotation)));
+	printf("cos: %f\n", game()->player.dir.x);
 	printf("sin: %f\n", sin(get_radian(game()->player.rotation)));
+	printf("sin: %f\n", game()->player.dir.y);
 }
 
 void	move_key(int key)

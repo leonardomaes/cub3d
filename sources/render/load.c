@@ -47,5 +47,7 @@ double	get_radian(int angle)
 
 void	load(void)
 {
+	game()->player.dir.x = cos(get_radian(game()->player.rotation));
+	game()->player.dir.y = sin(get_radian(game()->player.rotation));
 	
 }

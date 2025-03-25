@@ -47,7 +47,6 @@ void	init_mlx(t_cub *cub, const char *filename)
 void	init_game(t_cub	*cub, const char *filename)
 {
 	init_mlx(cub, filename);
-	game()->player.rotation = 1;
 }
 
 void	setup_hook(void)
