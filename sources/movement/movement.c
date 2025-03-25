@@ -99,10 +99,10 @@ void	rotate_key(int key)
 		else
 			game()->player.rotation += 1;
 	}
+	game()->player.dir.y = sin(get_radian(game()->player.rotation));
+	game()->player.dir.x = cos(get_radian(game()->player.rotation));
 	printf("%f\n", game()->player.rotation);
-	printf("cos: %f\n", cos(get_radian(game()->player.rotation)));
 	printf("cos: %f\n", game()->player.dir.x);
-	printf("sin: %f\n", sin(get_radian(game()->player.rotation)));
 	printf("sin: %f\n", game()->player.dir.y);
 }
 

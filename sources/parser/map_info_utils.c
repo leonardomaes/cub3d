@@ -29,6 +29,8 @@ void	init_player(char p, int x, int y)
 		game()->player.rotation = 180;
 	else if (p == 'E')
 		game()->player.rotation = 360;
+	game()->player.dir.y = sin(get_radian(game()->player.rotation));
+	game()->player.dir.x = cos(get_radian(game()->player.rotation));
 }
 
 /* 
