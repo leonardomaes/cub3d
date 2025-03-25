@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/25 00:37:17 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/25 01:01:09 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ void	move_forward(void)
 {
 	double		new_x;
 	double		new_y;
-	t_player	*player;
 
-	player = &game()->player;
-	new_x = player->pos.x + player->dir.x * MOVE_SPEED;
-	new_y = player->pos.y + player->dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x + game()->player.dir.x * MOVE_SPEED;
+	new_y = game()->player.pos.y + game()->player.dir.y * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
-		player->pos.x = new_x;
-		player->pos.y = new_y;
+		game()->player.pos.x = new_x;
+		game()->player.pos.y = new_y;
 	}
 }
 
@@ -71,15 +69,13 @@ void	move_backward(void)
 {
 	double		new_x;
 	double		new_y;
-	t_player	*player;
 
-	player = &game()->player;
-	new_x = player->pos.x - player->dir.x * MOVE_SPEED;
-	new_y = player->pos.y - player->dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x - game()->player.dir.x * MOVE_SPEED;
+	new_y = game()->player.pos.y - game()->player.dir.y * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
-		player->pos.x = new_x;
-		player->pos.y = new_y;
+		game()->player.pos.x = new_x;
+		game()->player.pos.y = new_y;
 	}
 }
 
@@ -87,15 +83,13 @@ void	move_left(void)
 {
 	double		new_x;
 	double		new_y;
-	t_player	*player;
 
-	player = &game()->player;
-	new_x = player->pos.x + player->dir.x * MOVE_SPEED;
-	new_y = player->pos.y - player->dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x - game()->player.pos.x * MOVE_SPEED;
+	new_y = game()->player.pos.y + game()->player.dir.y * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
-		player->pos.x = new_x;
-		player->pos.y = new_y;
+		game()->player.pos.x = new_x;
+		game()->player.pos.y = new_y;
 	}
 }
 
@@ -103,15 +97,13 @@ void	move_right(void)
 {
 	double		new_x;
 	double		new_y;
-	t_player	*player;
 
-	player = &game()->player;
-	new_x = player->pos.x - player->dir.x * MOVE_SPEED;
-	new_y = player->pos.y + player->dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x + game()->player.dir.x * MOVE_SPEED;
+	new_y = game()->player.pos.y - game()->player.dir.y * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
-		player->pos.x = new_x;
-		player->pos.y = new_y;
+		game()->player.pos.x = new_x;
+		game()->player.pos.y = new_y;
 	}
 }
 
