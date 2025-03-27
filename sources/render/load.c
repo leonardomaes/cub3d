@@ -12,27 +12,16 @@
 
 #include "../../includes/cub3d.h"
 
-void    draw_dda(int X0, int Y0, int X1, int Y1) // Desenhar linhas
-{ 
-	// calculate dx & dy 
-	int dx = X1 - X0;
-	int dy = Y1 - Y0;
+void	draw_line(double x, double y, t_pos dir)
+{
+	int	i;
 
-	// calculate steps required for generating pixels
-	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-
-	// calculate increment in x & y for each steps
-	float Xinc = dx / (float)steps;
-	float Yinc = dy / (float)steps;
- 
-	// Put pixel for each step
-	float X = X0;
-	float Y = Y0;
-	for (int i = 0; i <= steps; i++)
+	i = 0;
+	while (i++ < (MAP_SCALE * 100))
 	{
-		my_mlx_pixel_put(game(), round(X), round(Y), WHITE_PIXEL);
-		X += Xinc;
-		Y += Yinc;
+		my_mlx_pixel_put(game(), x, y, RED_PIXEL);
+		x += dir.x;
+		y += dir.y;
 	}
 }
 

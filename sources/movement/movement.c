@@ -61,8 +61,8 @@ void	move_left(void)
 	double		new_x;
 	double		new_y;
 
-	new_x = game()->player.pos.x - game()->player.pos.x * MOVE_SPEED;
-	new_y = game()->player.pos.y + game()->player.dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x + game()->player.dir.y * MOVE_SPEED;
+	new_y = game()->player.pos.y - game()->player.dir.x * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
 		game()->player.pos.x = new_x;
@@ -75,46 +75,45 @@ void	move_right(void)
 	double		new_x;
 	double		new_y;
 
-	new_x = game()->player.pos.x + game()->player.dir.x * MOVE_SPEED;
-	new_y = game()->player.pos.y - game()->player.dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x - game()->player.dir.y * MOVE_SPEED;
+	new_y = game()->player.pos.y + game()->player.dir.x * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
 		game()->player.pos.x = new_x;
 		game()->player.pos.y = new_y;
 	}
 }
+
 void	rotate_key(int key)
 {
 	if (key == XK_Right)
 	{
-		if (game()->player.rotation == 1)
-			game()->player.rotation = 360;
-		else
-			game()->player.rotation -= 1;
+		game()->player.rotation -= ROTATION_SPEED;
+		if (player(ROT) < 1)
+			game()->player.rotation += 360;
 	}
 	if (key == XK_Left)
 	{
-		if (game()->player.rotation == 360)
-			game()->player.rotation = 1;
-		else
-			game()->player.rotation += 1;
+		game()->player.rotation += ROTATION_SPEED;
+		if (player(ROT) > 360)
+			game()->player.rotation -= 360;
 	}
-	game()->player.dir.y = sin(get_radian(game()->player.rotation));
+	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
 	printf("%f\n", game()->player.rotation);
-	printf("cos: %f\n", game()->player.dir.x);
-	printf("sin: %f\n", game()->player.dir.y);
+	printf("cos/x: %f\n", game()->player.dir.x);
+	printf("sin/y: %f\n", game()->player.dir.y);
 }
 
 void	move_key(int key)
 {
 	if (key == XK_a)
 		move_left();
-	else if (key == XK_d)
+	if (key == XK_d)
 		move_right();
-	else if (key == XK_w)
+	if (key == XK_w)
 		move_forward();
-	else if (key == XK_s)
+	if (key == XK_s)
 		move_backward();
 }
 

@@ -47,12 +47,14 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.10
+# define ROTATION_SPEED 5.0
 # define MAP_SCALE 0.3
 # define POS_Y 1
 # define POS_X 2
 # define DIR_Y 3
 # define DIR_X 4
+# define ROT 5
 
 // MAP
 # define PI 3.14159265
@@ -132,8 +134,9 @@ t_cub			*game(void);
 
 // LOAD
 void			load(void);
-void			draw_dda(int X0, int Y0, int X1, int Y1);
+void    draw_dda(double X0, double Y0, double X1, double Y1) ;
 double			get_radian(int angle);
+void			draw_line(double x, double y, t_pos dir);
 
 // MINIMAP
 void			start_map(void);
@@ -151,7 +154,7 @@ void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			init_game(t_cub	*cub, const char *filename);
 void			init_mlx(t_cub *cub, const char *filename);
 void			setup_hook(void);
-
+int				player(int flag);
 // Trash
 void			print_map(void);
 

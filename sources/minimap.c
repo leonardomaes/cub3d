@@ -12,19 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-int	player(int flag)
-{
-	if (flag == POS_Y)
-		return (game()->player.pos.y * (game()->map->offset_y * MAP_SCALE));
-	else if (flag == POS_X)
-		return (game()->player.pos.x * (game()->map->offset_x * MAP_SCALE));
-	else if (flag == DIR_X)
-		return (game()->player.dir.x);
-	else if (flag == DIR_Y)
-		return (game()->player.dir.y);
-	return (0);
-}
-
 static void	draw_player(void)
 {
 	int		x;
@@ -45,7 +32,7 @@ static void	draw_player(void)
 		}
 		y++;
 	}
-	draw_dda(player(POS_X), player(POS_Y), player(POS_X) + (player(DIR_X) * 10), player(POS_Y) + (player(DIR_Y) * 10));
+	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
 }
 
 void	draw_square(int i, int j)
@@ -67,7 +54,6 @@ void	draw_square(int i, int j)
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, BLACK_PIXEL);
 			else if (game()->map->map[i][j] == '0' || is_player(game()->map->map[i][j]))
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, GRAY_PIXEL);
-			
 			x++;
 		}
 		y++;
