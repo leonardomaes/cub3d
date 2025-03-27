@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/27 00:03:34 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 // MAP SETTINGS
 # define MOVE_SPEED 0.05
+# define ROTATION_SPEED 5.0
 # define MAP_SCALE 0.3
 # define POS_Y 1
 # define POS_X 2

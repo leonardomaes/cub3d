@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:40:11 by rda-cunh          #+#    #+#             */
-/*   Updated: 2025/03/21 01:30:21 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/27 00:24:01 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ static void	draw_player(void)
 	int		y;
 	double	offsize_x;
 	double	offsize_y;
+	double	dir_x;
+	double	dir_y;
 
 	offsize_x = game()->player.pos.x * (game()->map->offset_x * MAP_SCALE);
 	offsize_y = game()->player.pos.y * (game()->map->offset_y * MAP_SCALE);
+	dir_x = game()->player.dir.x;
+	dir_y = game()->player.dir.y;
 	y = -3;
 	while (y < 3)
 	{
@@ -45,7 +49,7 @@ static void	draw_player(void)
 		}
 		y++;
 	}
-	draw_dda(player(POS_X), player(POS_Y), player(POS_X) + (player(DIR_X) * 10), player(POS_Y) + (player(DIR_Y) * 10));
+	draw_dda(offsize_x, offsize_y, offsize_x + (dir_x * 20), offsize_y + (dir_y * 20));
 }
 
 void	draw_square(int i, int j)

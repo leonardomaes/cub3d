@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/20 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/27 00:12:49 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	move_left(void)
 	double		new_x;
 	double		new_y;
 
-	new_x = game()->player.pos.x - game()->player.pos.x * MOVE_SPEED;
-	new_y = game()->player.pos.y + game()->player.dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x + game()->player.dir.y * MOVE_SPEED;
+	new_y = game()->player.pos.y - game()->player.dir.x * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
 		game()->player.pos.x = new_x;
@@ -75,8 +75,8 @@ void	move_right(void)
 	double		new_x;
 	double		new_y;
 
-	new_x = game()->player.pos.x + game()->player.dir.x * MOVE_SPEED;
-	new_y = game()->player.pos.y - game()->player.dir.y * MOVE_SPEED;
+	new_x = game()->player.pos.x - game()->player.dir.y * MOVE_SPEED;
+	new_y = game()->player.pos.y + game()->player.dir.x * MOVE_SPEED;
 	if (valid_move(new_x, new_y))
 	{
 		game()->player.pos.x = new_x;
@@ -87,17 +87,15 @@ void	rotate_key(int key)
 {
 	if (key == XK_Right)
 	{
-		if (game()->player.rotation == 1)
-			game()->player.rotation = 360;
-		else
-			game()->player.rotation -= 1;
+		game()->player.rotation -= ROTATION_SPEED;
+		if (game()->player.rotation < 1)
+			game()->player.rotation += 360;
 	}
 	if (key == XK_Left)
 	{
-		if (game()->player.rotation == 360)
-			game()->player.rotation = 1;
-		else
-			game()->player.rotation += 1;
+		game()->player.rotation += ROTATION_SPEED;
+		if (game()->player.rotation > 360)
+			game()->player.rotation -= 360;
 	}
 	game()->player.dir.y = sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
