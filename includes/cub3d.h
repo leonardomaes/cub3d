@@ -73,6 +73,10 @@
 
 typedef struct s_ray
 {
+	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
+	double	dir_x; 
+	double	dir_y; // sets the direction vector of each ray (used for DDA calculations)
+	
 
 }				t_ray;
 
@@ -87,6 +91,7 @@ typedef struct s_player
 	double	rotation;
 	t_pos	dir;
 	t_pos	pos;
+	t_pos	plane;
 }				t_player;
 
 typedef struct s_mlx

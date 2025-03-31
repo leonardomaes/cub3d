@@ -12,9 +12,14 @@
 
 #include "../../includes/cub3d.h"
 
+void    init_ray(t_ray *ray)
+{
+
+}
+
 static void init_raycast(int x, t_ray *ray, t_player *player)
 {
-    
+    init_ray(ray); //init ray struc values
 }
 
 int raycast(t_player *player)
