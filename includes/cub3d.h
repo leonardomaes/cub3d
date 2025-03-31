@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:53:13 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ typedef struct s_ray
 	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
 	double	dir_x; 
 	double	dir_y; // sets the direction vector of each ray (used for DDA calculations)
-	
+	double	ray_pos_x;
+	double 	ray_pos_y; // sets the position vector for ray casting porpuses
+	double	deltadist_x;
+	double	deltadist_y; //
 
 }				t_ray;
 
@@ -145,7 +148,7 @@ t_cub			*game(void);
 
 // LOAD
 void			load(void);
-void    draw_dda(double X0, double Y0, double X1, double Y1) ;
+void    		draw_dda(double X0, double Y0, double X1, double Y1) ;
 double			get_radian(int angle);
 void			draw_line(double x, double y, t_pos dir);
 

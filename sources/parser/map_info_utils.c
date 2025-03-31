@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/12 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/03/31 19:47:35 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,29 @@ void	init_player(char p, int x, int y)
 	game()->player.pos.x = x + 0.5;
 	game()->player.pos.y = y + 1.5;
 	if (p == 'N')
+	{
 		game()->player.rotation = 90;
+		game()->player.plane.x = 0.66;
+		game()->player.plane.y = 0;
+	}
 	else if (p == 'S')
+	{
 		game()->player.rotation = 270;
+		game()->player.plane.x = -0.66;
+		game()->player.plane.y = 0;
+	}
 	else if (p == 'W')
+	{
 		game()->player.rotation = 180;
+		game()->player.plane.x = 0;
+		game()->player.plane.y = -0.66;
+	}
 	else if (p == 'E')
+	{
 		game()->player.rotation = 360;
+		game()->player.plane.x = 0;
+		game()->player.plane.y = 0.66;
+	}
 	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
 }
