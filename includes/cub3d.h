@@ -71,6 +71,11 @@
 /*					Structs						*/
 /***********************************************/
 
+typedef struct s_ray
+{
+
+}				t_ray;
+
 typedef struct s_pos
 {
 	double	x;
@@ -123,6 +128,7 @@ typedef struct s_cub
 	t_player	player;
 	t_map		*map;
 	t_mlx		*mlx;
+	t_ray		ray;	
 }				t_cub;
 
 /***********************************************/

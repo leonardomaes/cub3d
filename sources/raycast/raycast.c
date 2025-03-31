@@ -12,3 +12,22 @@
 
 #include "../../includes/cub3d.h"
 
+static void init_raycast(int x, t_ray *ray, t_player *player)
+{
+    
+}
+
+int raycast(t_player *player)
+{
+    t_ray   ray;
+    int     x;
+
+    x = 0;
+    ray = game()->ray;
+    while (x < WINDOW_WIDTH)
+    {
+        init_raycast(x, &ray, player);
+        //main loop
+    }
+    return (1);
+}
