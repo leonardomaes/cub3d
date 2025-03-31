@@ -37,6 +37,7 @@
 // WINDOW SETTINGS
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
+# define FOV 66.00
 
 // Colors
 # define RED_PIXEL 0xFF0000
@@ -66,6 +67,10 @@
 # define PLAYER_EA 6
 # define PLAYER_WE 7
 # define INVALID_CHAR 8
+# define Y 9
+# define X 10
+# define CAM_Y 11
+# define CAM_X 12
 
 /***********************************************/
 /*					Structs						*/
@@ -80,9 +85,19 @@ typedef struct s_pos
 typedef struct s_player
 {
 	double	rotation;
+	t_pos	plane;
 	t_pos	dir;
 	t_pos	pos;
 }				t_player;
+
+typedef struct s_ray
+{
+	t_pos	pos;
+	t_pos	dir;
+	t_pos	camera;
+	double	cam_x;
+	double	plane_size;
+}				t_ray;
 
 typedef struct s_mlx
 {
@@ -121,6 +136,7 @@ typedef struct s_cub
 {
 	char		*filename;
 	t_player	player;
+	t_ray		ray;
 	t_map		*map;
 	t_mlx		*mlx;
 }				t_cub;
@@ -131,15 +147,6 @@ typedef struct s_cub
 
 // MAIN
 t_cub			*game(void);
-
-// LOAD
-void			load(void);
-void    draw_dda(double X0, double Y0, double X1, double Y1) ;
-double			get_radian(int angle);
-void			draw_line(double x, double y, t_pos dir);
-
-// MINIMAP
-void			start_map(void);
 
 // FREE
 void			clear_mlx(t_mlx *mlx);
@@ -204,6 +211,17 @@ void			init_player(char p, int x, int y);
 
 // Render
 int				start_game(void);
+
+// LOAD
+void			load(void);
+double			get_radian(int angle);
+void			draw_line(double x, double y, t_pos dir);
+
+// Minimap
+void			start_minimap(void);
+
+//Raycast
+void    		raycast(void);
 
 /*************************************************/
 /******************* MOVEMENT ********************/

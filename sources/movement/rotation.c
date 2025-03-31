@@ -14,6 +14,8 @@
 
 void	rotate_key(int key)
 {
+	double	temp;
+
 	if (key == XK_Right)
 	{
 		game()->player.rotation -= ROTATION_SPEED;
@@ -28,9 +30,6 @@ void	rotate_key(int key)
 	}
 	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
-	printf("%f\n", game()->player.rotation);
-	printf("cos/x: %f\n", game()->player.dir.x);
-	printf("sin/y: %f\n", game()->player.dir.y);
 }
 
 

@@ -38,7 +38,8 @@ int start_game(void)
 {
 	load();
 	start_floors();
-	start_map();
+	start_minimap();
+	raycast();
 	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win, game()->mlx->img, 0, 0);
 	return (0);
 }

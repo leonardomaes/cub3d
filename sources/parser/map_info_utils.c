@@ -22,13 +22,29 @@ void	init_player(char p, int x, int y)
 	game()->player.pos.x = x + 0.5;
 	game()->player.pos.y = y + 1.5;
 	if (p == 'N')
+	{
+		game()->player.plane.x = (FOV / 100);
+		game()->player.plane.y = 0;
 		game()->player.rotation = 90;
+	}
 	else if (p == 'S')
+	{
+		game()->player.plane.x = -(FOV / 100);
+		game()->player.plane.y = 0;
 		game()->player.rotation = 270;
+	}
 	else if (p == 'W')
+	{
+		game()->player.plane.x = 0;
+		game()->player.plane.y = -(FOV / 100);
 		game()->player.rotation = 180;
+	}
 	else if (p == 'E')
+	{
+		game()->player.plane.x = 0;
+		game()->player.plane.y = (FOV / 100);
 		game()->player.rotation = 360;
+	}
 	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
 }

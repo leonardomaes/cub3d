@@ -31,8 +31,8 @@ void	move_key(int key)
 
 void	do_key(int key)
 {
-	rotate_key(key);
 	move_key(key);
+	rotate_key(key);
 }
 
 int check_key(int keysym)
@@ -41,5 +41,10 @@ int check_key(int keysym)
 		kill_all();
 	if (is_key(keysym))
 		do_key(keysym);
+	printf("%f\n", game()->player.rotation);
+	printf("cos/x: %f\n", game()->player.dir.x);
+	printf("sin/y: %f\n", game()->player.dir.y);
+	printf("PosX: %f\n", game()->player.pos.x);
+	printf("posY: %f\n", game()->player.pos.y);
 	return (0);
 }

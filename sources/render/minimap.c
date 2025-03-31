@@ -60,7 +60,7 @@ void	draw_square(int i, int j)
 	}
 }
 
-void	start_map(void)
+void	start_minimap(void)
 {
 	int	i;
 	int	j;

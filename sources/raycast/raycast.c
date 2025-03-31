@@ -12,3 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
+void	init_raycast(int x, t_ray *ray)
+{
+	ray->cam_x = 2 * (x / WINDOW_WIDTH) - 1;
+	ray->pos = game()->player.pos;
+	ray->dir = game()->player.dir;
+	ray->plane_size = FOV / 100;
+}
+
+
+
+void	raycast(void)
+{
+	t_ray ray;
+	int	x;
+
+	x = 0;
+	while (x <= WINDOW_WIDTH)
+	{
+		init_raycast(x, &ray);
+		x++;
+	}
+}

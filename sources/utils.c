@@ -24,6 +24,14 @@ int	player(int flag)
 		return (game()->player.dir.y);
 	else if (flag == ROT)
 		return (game()->player.rotation);
+	else if (flag == X)
+		return (game()->player.pos.x);
+	else if (flag == Y)
+		return (game()->player.pos.y);
+	else if (flag == CAM_X)
+		return (game()->player.plane.x);
+	else if (flag == CAM_Y)
+		return (game()->player.plane.y);
 	return (0);
 }
 
