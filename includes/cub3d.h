@@ -158,7 +158,9 @@ int				player(int flag);
 // Trash
 void			print_map(void);
 
+/*************************************************/
 /******************* PARSER **********************/
+/*************************************************/
 
 // Parser
 int				file_check(void);
@@ -196,12 +198,28 @@ int				get_floor(t_map *map, char *line, int *i);
 unsigned int	get_rgb(int r, int g, int b);
 void			init_player(char p, int x, int y);
 
+/*************************************************/
 /******************* RENDER **********************/
+/*************************************************/
 
 // Render
 int				start_game(void);
 
+/*************************************************/
+/******************* MOVEMENT ********************/
+/*************************************************/
+
 // Movement
 int				check_key(int keysym);
+
+// Movement2
+void			move_right(void);
+void			move_left(void);
+void			move_backward(void);
+void			move_forward(void);
+
+// Rotation
+void			rotate_key(int key);
+
 
 #endif

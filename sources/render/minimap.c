@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap2.c                                         :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-
-void	draw_square2(int i, int j)
+static void	draw_player(void)
 {
 	int		x;
 	int		y;
 	double	offsize_x;
 	double	offsize_y;
 
-	offsize_x = j * ((WINDOW_WIDTH / game()->map->max_x) * MAP_SCALE);
-	offsize_y = i * ((WINDOW_HEIGHT / game()->map->max_y) * MAP_SCALE);
+	offsize_x = game()->player.pos.x * (game()->map->offset_x * MAP_SCALE);
+	offsize_y = game()->player.pos.y * (game()->map->offset_y * MAP_SCALE);
+	y = -3;
+	while (y < 3)
+	{
+		x = -3;
+		while (x < 3)
+		{
+			my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, RED_PIXEL);
+			x++;
+		}
+		y++;
+	}
+	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
+}
+
+void	draw_square(int i, int j)
+{
+	int		x;
+	int		y;
+	double	offsize_x;
+	double	offsize_y;
+
+	offsize_x = j * (game()->map->offset_x * MAP_SCALE);
+	offsize_y = i * (game()->map->offset_y * MAP_SCALE);
 	y = 1;
 	while (y < (MAP_SCALE * 100))
 	{
 		x = 1;
 		while (x < (MAP_SCALE * 100))
 		{
-			if (game()->map->int_map[i][j] == WALL || game()->map->int_map[i][j] == BLANK)
+			if (game()->map->map[i][j] == '1' || game()->map->int_map[i][j] == ' ')
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, BLACK_PIXEL);
-			else if (game()->map->int_map[i][j] == FLOOR)
+			else if (game()->map->map[i][j] == '0' || is_player(game()->map->map[i][j]))
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, GRAY_PIXEL);
 			x++;
 		}
@@ -38,20 +60,21 @@ void	draw_square2(int i, int j)
 	}
 }
 
-void	start_map2(void)
+void	start_map(void)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (game()->map->int_map[i])
+	while (game()->map->map[i])
 	{
 		j = 0;
-		while (game()->map->int_map[i][j])
+		while (game()->map->map[i][j])
 		{
-			draw_square2(i, j);
+			draw_square(i, j);
 			j++;
 		}
 		i++;
 	}
+	draw_player();
 }

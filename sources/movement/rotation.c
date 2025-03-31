@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,34 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
-int	is_key(int key)
+void	rotate_key(int key)
 {
-	return (key == XK_w || key == XK_s || key == XK_a || key == XK_d || key == XK_Left || key == XK_Right);
+	if (key == XK_Right)
+	{
+		game()->player.rotation -= ROTATION_SPEED;
+		if (player(ROT) < 1)
+			game()->player.rotation += 360;
+	}
+	if (key == XK_Left)
+	{
+		game()->player.rotation += ROTATION_SPEED;
+		if (player(ROT) > 360)
+			game()->player.rotation -= 360;
+	}
+	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
+	game()->player.dir.x = cos(get_radian(game()->player.rotation));
+	printf("%f\n", game()->player.rotation);
+	printf("cos/x: %f\n", game()->player.dir.x);
+	printf("sin/y: %f\n", game()->player.dir.y);
 }
 
-void	move_key(int key)
-{
-	if (key == XK_a)
-		move_left();
-	if (key == XK_d)
-		move_right();
-	if (key == XK_w)
-		move_forward();
-	if (key == XK_s)
-		move_backward();
-}
 
-void	do_key(int key)
-{
-	rotate_key(key);
-	move_key(key);
-}
-
-int check_key(int keysym)
-{
-	if (keysym == XK_Escape)
-		kill_all();
-	if (is_key(keysym))
-		do_key(keysym);
-	return (0);
-}
