@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/31 19:53:13 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/01 19:54:00 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,15 @@ typedef struct s_ray
 	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
 	double	dir_x; 
 	double	dir_y; // sets the direction vector of each ray (used for DDA calculations)
-	double	ray_pos_x;
-	double 	ray_pos_y; // sets the position vector for ray casting porpuses
+	int		map_x;
+	int 	map_y; // sets the position vector for ray casting porpuses
+	int		step_x;
+	int		step_y;
+	double	sidedist_x;
+	double	sidedist_y;
 	double	deltadist_x;
-	double	deltadist_y; //
+	double	deltadist_y;
+	int		side;
 
 }				t_ray;
 
@@ -188,11 +193,7 @@ int				check_map_conditions(char **content, int *i);
 int				check_valid_chars(char **content);
 
 // Parser Conditions
-void			init_map(t_map *map);
-int				check_map(char	**content, int *i);
-void			get_map2(t_map	*map, char **content, int i);
-void			get_map(t_map	*map, char **content, int i);
-void			parse_map(t_map *map, char	**content);
+void			init_map(t_map *map);        
 
 // Parser Utils
 int				is_texture(char *str);
