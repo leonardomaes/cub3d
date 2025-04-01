@@ -12,6 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
+/* void	render_walls(t_ray *ray, int x)
+{
+
+} */
+
 void	draw_line(double x, double y, t_pos dir)
 {
 	int	i;

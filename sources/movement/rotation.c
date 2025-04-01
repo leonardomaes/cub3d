@@ -47,6 +47,7 @@ void	rotate_key(int key)
 	double	rotspeed;
 
 	//temp_dir_x = game()->player.dir.x;
+	rotspeed = 0.0;
 	temp_plane_x = game()->player.plane.x;
 	if (key == XK_Right)
 	{

@@ -95,7 +95,15 @@ typedef struct s_ray
 	t_pos	pos;
 	t_pos	dir;
 	t_pos	camera;
-	double	cam_x;
+	t_pos	delta_dist;
+	t_pos	side_dist;
+	t_pos	step;
+	int		side;
+	int		line_height;
+	int		start;
+	int		end;
+	double	wall_x;
+	double	perp_wall_dist;
 	double	plane_size;
 }				t_ray;
 
