@@ -46,5 +46,7 @@ int check_key(int keysym)
 	printf("sin/y: %f\n", game()->player.dir.y);
 	printf("PosX: %f\n", game()->player.pos.x);
 	printf("posY: %f\n", game()->player.pos.y);
+	printf("CamX: %f\n", game()->player.plane.x);
+	printf("CamY: %f\n", game()->player.plane.y);
 	return (0);
 }

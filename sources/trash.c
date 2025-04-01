@@ -53,5 +53,7 @@ void	print_map(void)
 	printf("Player X:%f\n", game()->player.pos.x);
 	printf("Player Y:%f\n", game()->player.pos.y);
 	printf("Player Rotation:%f\n", game()->player.rotation);
+	printf("CamX: %f\n", game()->player.plane.x);
+	printf("CamY: %f\n", game()->player.plane.y);
 	printf("\n");
 }

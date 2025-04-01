@@ -16,7 +16,8 @@ void	init_raycast(int x, t_ray *ray)
 {
 	ray->cam_x = 2 * (x / WINDOW_WIDTH) - 1;
 	ray->pos = game()->player.pos;
-	ray->dir = game()->player.dir;
+	ray->dir.y = game()->player.dir.y + game()->player.plane.y * ray->cam_x;
+	ray->dir.x = game()->player.dir.x + game()->player.plane.x * ray->cam_x;
 	ray->plane_size = FOV / 100;
 }
 
