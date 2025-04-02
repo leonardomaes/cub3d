@@ -56,6 +56,10 @@
 # define DIR_Y 3
 # define DIR_X 4
 # define ROT 5
+# define NORTH 6
+# define SOUTH 7
+# define EAST 8
+# define WEST 9
 
 // MAP
 # define PI 3.14159265
@@ -126,6 +130,7 @@ typedef struct s_texture
 	char			*ea_path;
 	unsigned int	floor;
 	unsigned int	ceiling;
+	int				index;
 }				t_texture;
 
 typedef struct s_map
@@ -224,6 +229,7 @@ int				start_game(void);
 void			load(void);
 double			get_radian(int angle);
 void			draw_line(double x, double y, t_pos dir);
+void			render_walls(t_ray *ray, int x);
 
 // Minimap
 void			start_minimap(void);

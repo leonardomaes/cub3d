@@ -63,8 +63,7 @@ void	init_mlx(t_cub *cub, const char *filename)
 			WINDOW_WIDTH, WINDOW_HEIGHT, title);
 	free(title);
 	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	cub->mlx->addr = mlx_get_data_addr(cub->mlx->img, &cub->mlx->bits_per_pixel,
-			&cub->mlx->line_length, &cub->mlx->endian);
+	cub->mlx->addr = mlx_get_data_addr(cub->mlx->img, &cub->mlx->bits_per_pixel, &cub->mlx->line_length, &cub->mlx->endian);
 }
 
 void	init_game(t_cub	*cub, const char *filename)

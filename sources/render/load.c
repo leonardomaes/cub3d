@@ -12,9 +12,52 @@
 
 #include "../../includes/cub3d.h"
 
+void	get_wall_index(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->dir.x < 0)
+			game()->map->texture->index = WEST;
+		else
+			game()->map->texture->index = EAST;
+	}
+	else
+	{
+		if (ray->dir.y > 0)
+			game()->map->texture->index = SOUTH;
+		else
+			game()->map->texture->index = NORTH;
+	}
+}
+
+void	render_walls(t_ray *ray, int x)
+{
+	int	y;
+	int	color;
+
+	y = ray->start;
+	while (y < ray->end)
+	{
+		if (ray->side == 0)
+			color = 0xFFFFFF; // Branco para paredes verticais
+		else
+			color = 0xAAAAAA; // Cinza para paredes horizontais
+		my_mlx_pixel_put(game(), x, y, color);
+		y++;
+	}
+}
+
 /* void	render_walls(t_ray *ray, int x)
 {
-
+	int		y;
+	
+	get_wall_index(ray);
+	y = ray->start;
+	while (y < WINDOW_HEIGHT)
+	{
+		my_mlx_pixel_put(game(), x, y, RED_PIXEL);
+		y++;	
+	}
 } */
 
 void	draw_line(double x, double y, t_pos dir)
