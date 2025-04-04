@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/01 19:54:00 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:18:50 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define RED_PIXEL 0xFF0000
 # define BLUE_PIXEL 0x0000FF
 # define GREEN_PIXEL 0x00FF00
+# define YELLOW_PIXEL 0xFFFF00
 # define WHITE_PIXEL 0xFFFFFF
 # define BLACK_PIXEL 0x000000
 # define GRAY_PIXEL 0xAAAAAA
@@ -75,17 +76,22 @@ typedef struct s_ray
 {
 	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
 	double	dir_x; 
-	double	dir_y; // sets the direction vector of each ray (used for DDA calculations)
+	double	dir_y; // sets the direction vectors of each ray (used for DDA calculations)
 	int		map_x;
-	int 	map_y; // sets the position vector for ray casting porpuses
+	int 	map_y; // current map celll (int pair of number), used to check collisions
 	int		step_x;
-	int		step_y;
+	int		step_y; // determines the movement directtion in the game grid (1 for right/down, -1 for left/up)
 	double	sidedist_x;
-	double	sidedist_y;
+	double	sidedist_y; // used in dda: distance from player position to the x/y gridline
 	double	deltadist_x;
-	double	deltadist_y;
-	int		side;
-
+	double	deltadist_y; // used in dda: distance between grid lines in ray direction
+	double	wall_dist; // perpenticular distance to hit wall (used to correct perspective)
+	double	wall_x; // exact position on wall (for texture porpuses)
+	int		side; // wall side flag (0 for x side (vertical) and 1 for y side (horizontal)): used for shading and texture orientation
+	int		line_height;
+	int		draw_start;
+	int		draw_end; // walls rendering parameters
+	int		wall_color; // for testing porpuses with colors
 }				t_ray;
 
 typedef struct s_pos
@@ -193,7 +199,8 @@ int				check_map_conditions(char **content, int *i);
 int				check_valid_chars(char **content);
 
 // Parser Conditions
-void			init_map(t_map *map);        
+void			init_map(t_map *map);
+void			parse_map(t_map *map, char	**content);   
 
 // Parser Utils
 int				is_texture(char *str);
@@ -218,5 +225,9 @@ int				start_game(void);
 
 // Movement
 int				check_key(int keysym);
+
+//raycasting
+void			init_ray(t_ray *ray); //to change to init functions
+int				raycast(t_player *player);
 
 #endif
