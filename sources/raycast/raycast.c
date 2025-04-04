@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/04 13:54:13 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:50:45 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void set_dda(t_ray *ray, t_player *player)
     }
     else
     {
-        ray->step_y = -1;
+        ray->step_y = 1;
         ray->sidedist_y = (ray->map_y + 1.0 - player->pos.y) * ray-> deltadist_y;
     }
 }
@@ -79,13 +79,13 @@ static void	perform_dda(t_ray *ray)
 	{
 		if(ray->sidedist_x < ray->sidedist_y)
 		{
-            ray->sidedist_x += ray->sidedist_x;
+            ray->sidedist_x += ray->deltadist_x;
             ray->map_x += ray->step_x;
             ray->side = 0; 
         }
         else
         {
-            ray->sidedist_y += ray->sidedist_y;
+            ray->sidedist_y += ray->deltadist_y;
             ray->map_y += ray->step_y;
             ray->side = 1; 
         }
@@ -94,7 +94,7 @@ static void	perform_dda(t_ray *ray)
                 || ray->map_y > game()->map->max_y - 0.25
                 || ray->map_x > game()->map->max_x - 0.25)
                 break ;
-        else if (game()->map->map[ray->map_x][ray->map_y] > '0')
+        else if (game()->map->map[ray->map_y][ray->map_x] > '0')
             hit = 1;
     }
 }
@@ -171,6 +171,6 @@ int	raycast(t_player *player)
 		calculate_wall_height(&ray, player);
 		draw_walls(&ray, x);
         x++;
-    }
+    }	
     return (0);
 }
