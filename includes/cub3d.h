@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/04 13:18:50 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:34:42 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 /***********************************************/
 
 // WINDOW SETTINGS
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 960
+# define WINDOW_HEIGHT 600
 
 // Colors
 # define RED_PIXEL 0xFF0000
@@ -51,6 +51,7 @@
 # define MOVE_SPEED 0.10
 # define ROTATION_SPEED 5.0
 # define MAP_SCALE 0.3
+# define FOV_ANGLE 0.66
 # define POS_Y 1
 # define POS_X 2
 # define DIR_Y 3

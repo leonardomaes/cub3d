@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/04 14:50:45 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:42:56 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,6 @@ static void	calculate_wall_height(t_ray *ray, t_player *player)
 		else
 			ray->wall_color = YELLOW_PIXEL; // yellow for south walls
 	}
-
-	//darken the color for y-side walls to creat depth
-	if (ray->side == 1)
-		ray->wall_color = (ray->wall_color >> 1) & 8355711;// 50% darker
 }
 
 static void	draw_walls(t_ray *ray, int x)

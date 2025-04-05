@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/31 19:47:35 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:16:51 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ void	init_player(char p, int x, int y)
 	if (p == 'N')
 	{
 		game()->player.rotation = 90;
-		game()->player.plane.x = 0.66;
+		game()->player.plane.x = FOV_ANGLE;
 		game()->player.plane.y = 0;
 	}
 	else if (p == 'S')
 	{
 		game()->player.rotation = 270;
-		game()->player.plane.x = -0.66;
+		game()->player.plane.x = -FOV_ANGLE;
 		game()->player.plane.y = 0;
 	}
 	else if (p == 'W')
 	{
 		game()->player.rotation = 180;
 		game()->player.plane.x = 0;
-		game()->player.plane.y = -0.66;
+		game()->player.plane.y = -FOV_ANGLE;
 	}
 	else if (p == 'E')
 	{
 		game()->player.rotation = 360;
 		game()->player.plane.x = 0;
-		game()->player.plane.y = 0.66;
+		game()->player.plane.y = FOV_ANGLE;
 	}
 	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
 	game()->player.dir.x = cos(get_radian(game()->player.rotation));
