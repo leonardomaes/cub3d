@@ -25,8 +25,8 @@ int	main(int argc, char *argv[])
 	{
 		init_game(game(), argv[1]);
 		file_check();
-		//load_texture();
 		print_map();	// Apagar
+		load_texture();
 		setup_hook();
 	}
 	else

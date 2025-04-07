@@ -127,6 +127,8 @@ typedef struct s_mlx
 	int		endian;
 	void	*mlx;
 	void	*win;
+	int		width;
+	int		height;
 }				t_mlx;
 
 typedef struct s_texture
