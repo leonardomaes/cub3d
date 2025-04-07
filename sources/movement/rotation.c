@@ -42,33 +42,34 @@
 
 void	rotate_key(int key)
 {
-	//double	temp_dir_x;
-	double	temp_plane_x;
-	double	rotspeed;
+	double	angle;
 
-	//temp_dir_x = game()->player.dir.x;
-	rotspeed = 0.0;
-	temp_plane_x = game()->player.plane.x;
+	// Update the rotation angle when pressing keys
 	if (key == XK_Right)
 	{
-		rotspeed = -ROTATION_SPEED;
 		game()->player.rotation -= ROTATION_SPEED;
 		if (player(ROT) < 1)
 			game()->player.rotation += 360;
 	}
 	else if (key == XK_Left)
 	{
-		rotspeed = ROTATION_SPEED;
 		game()->player.rotation += ROTATION_SPEED;
 		if (player(ROT) > 360)
 			game()->player.rotation -= 360;
 	}
-	// game()->player.dir.x = temp_dir_x * cos(get_radian(rotspeed)) - game()->player.dir.y * sin(get_radian(rotspeed));
-	// game()->player.dir.y = temp_dir_x * sin(get_radian(rotspeed)) + game()->player.dir.y * cos(get_radian(rotspeed));
-	game()->player.dir.y = -sin(get_radian(game()->player.rotation));
-	game()->player.dir.x = cos(get_radian(game()->player.rotation));
+	
+	// Calculate direction vector from angle
+	angle = get_radian(game()->player.rotation);
+	game()->player.dir.x = cos(angle);
+	game()->player.dir.y = -sin(angle);
 
-	game()->player.plane.x = temp_plane_x * cos(get_radian(rotspeed)) - game()->player.plane.y * sin(get_radian(rotspeed));
-	game()->player.plane.y = temp_plane_x * sin(get_radian(rotspeed)) + game()->player.plane.y * cos(get_radian(rotspeed));
+	// for debugging porpuses - DELETE LATER
+	printf("%f\n", game()->player.rotation);
+	printf("cos/x: %f\n", game()->player.dir.x);
+	printf("sin/y: %f\n", game()->player.dir.y);
+	
+	// Calculate camera plane perpendicular to direction (this was the part missing from previous implementation) - Also introduced FOV_ANGLE macro to insure relation withe the init_player function 
+	game()->player.plane.x = -game()->player.dir.y * FOV_ANGLE;
+	game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
 }
 

@@ -36,9 +36,8 @@ void	start_floors(void)
 
 int start_game(void)
 {
-	load();
 	start_floors();
-	raycast();
+	raycast(&game()->player);
 	start_minimap();
 	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win, game()->mlx->img, 0, 0);
 	return (0);

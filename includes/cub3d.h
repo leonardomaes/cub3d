@@ -35,22 +35,24 @@
 /***********************************************/
 
 // WINDOW SETTINGS
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 960
+# define WINDOW_HEIGHT 600
 # define FOV 66.00
 
 // Colors
 # define RED_PIXEL 0xFF0000
 # define BLUE_PIXEL 0x0000FF
 # define GREEN_PIXEL 0x00FF00
+# define YELLOW_PIXEL 0xFFFF00
 # define WHITE_PIXEL 0xFFFFFF
 # define BLACK_PIXEL 0x000000
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.10
+# define MOVE_SPEED 0.03
 # define ROTATION_SPEED 5.0
 # define MAP_SCALE 0.3
+# define FOV_ANGLE 0.66
 # define POS_Y 1
 # define POS_X 2
 # define DIR_Y 3
@@ -80,6 +82,28 @@
 /*					Structs						*/
 /***********************************************/
 
+typedef struct s_ray
+{
+	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
+	double	dir_x; 
+	double	dir_y; // sets the direction vectors of each ray (used for DDA calculations)
+	int		map_x;
+	int 	map_y; // current map celll (int pair of number), used to check collisions
+	int		step_x;
+	int		step_y; // determines the movement directtion in the game grid (1 for right/down, -1 for left/up)
+	double	sidedist_x;
+	double	sidedist_y; // used in dda: distance from player position to the x/y gridline
+	double	deltadist_x;
+	double	deltadist_y; // used in dda: distance between grid lines in ray direction
+	double	wall_dist; // perpenticular distance to hit wall (used to correct perspective)
+	double	wall_x; // exact position on wall (for texture porpuses)
+	int		side; // wall side flag (0 for x side (vertical) and 1 for y side (horizontal)): used for shading and texture orientation
+	int		line_height;
+	int		draw_start;
+	int		draw_end; // walls rendering parameters
+	int		wall_color; // for testing porpuses with colors
+}				t_ray;
+
 typedef struct s_pos
 {
 	double	x;
@@ -94,23 +118,6 @@ typedef struct s_player
 	t_pos	pos;
 }				t_player;
 
-typedef struct s_ray
-{
-	t_pos	pos;
-	t_pos	dir;
-	t_pos	camera;
-	t_pos	delta_dist;
-	t_pos	side_dist;
-	t_pos	step;
-	int		side;
-	int		line_height;
-	int		start;
-	int		end;
-	double	wall_x;
-	double	perp_wall_dist;
-	double	plane_size;
-}				t_ray;
-
 typedef struct s_mlx
 {
 	void	*img;
@@ -124,13 +131,17 @@ typedef struct s_mlx
 
 typedef struct s_texture
 {
+	unsigned int	floor;
+	unsigned int	ceiling;
 	char			*no_path;
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
-	unsigned int	floor;
-	unsigned int	ceiling;
-	int				index;
+	int				size;
+	int				**no_color;
+	int				**so_color;
+	int				**we_color;
+	int				**ea_color;
 }				t_texture;
 
 typedef struct s_map
@@ -226,16 +237,15 @@ void			init_player(char p, int x, int y);
 int				start_game(void);
 
 // LOAD
-void			load(void);
+void			load_texture(void);
 double			get_radian(int angle);
 void			draw_line(double x, double y, t_pos dir);
-void			render_walls(t_ray *ray, int x);
 
 // Minimap
 void			start_minimap(void);
 
 //Raycast
-void    		raycast(void);
+int				raycast(t_player *player);
 
 /*************************************************/
 /******************* MOVEMENT ********************/
