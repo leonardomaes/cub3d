@@ -36,38 +36,38 @@ void	init_ray(t_ray *ray) // change this for the init functions
 
 static void	init_raycast(int x, t_ray *ray, t_player *player)
 {
-    init_ray(ray); //init ray struct values
-    ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-    ray->dir_x = player->dir.x + player->plane.x * ray->camera_x;
-    ray->dir_y = player->dir.y + player->plane.y * ray->camera_x;
-    ray->map_x = (int)player->pos.x;
-    ray->map_y = (int)player->pos.y;
-    ray->deltadist_x = fabs(1 / ray->dir_x);
-    ray->deltadist_y = fabs(1 / ray->dir_y);
+	init_ray(ray); //init ray struct values
+	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+	ray->dir_x = player->dir.x + player->plane.x * ray->camera_x;
+	ray->dir_y = player->dir.y + player->plane.y * ray->camera_x;
+	ray->map_x = (int)player->pos.x;
+	ray->map_y = (int)player->pos.y;
+	ray->deltadist_x = fabs(1 / ray->dir_x);
+	ray->deltadist_y = fabs(1 / ray->dir_y);
 }
 
 static void set_dda(t_ray *ray, t_player *player)
 {
-    if (ray->dir_x < 0)
-    {
-        ray->step_x = -1;
-        ray->sidedist_x = (player->pos.x - ray->map_x) * ray->deltadist_x;
-    }
-    else
-    {
-        ray->step_x = 1;
-        ray->sidedist_x = (ray->map_x + 1.0 - player->pos.x) * ray->deltadist_x;
-    }
-    if (ray->dir_y < 0)
-    {
-        ray->step_y = -1;
-        ray->sidedist_y = (player->pos.y - ray->map_y) * ray->deltadist_y;
-    }
-    else
-    {
-        ray->step_y = 1;
-        ray->sidedist_y = (ray->map_y + 1.0 - player->pos.y) * ray-> deltadist_y;
-    }
+	if (ray->dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->sidedist_x = (player->pos.x - ray->map_x) * ray->deltadist_x;
+	}
+	else
+	{
+		ray->step_x = 1;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->pos.x) * ray->deltadist_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->sidedist_y = (player->pos.y - ray->map_y) * ray->deltadist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->pos.y) * ray-> deltadist_y;
+	}
 }
 
 static void	perform_dda(t_ray *ray)
@@ -79,24 +79,24 @@ static void	perform_dda(t_ray *ray)
 	{
 		if(ray->sidedist_x < ray->sidedist_y)
 		{
-            ray->sidedist_x += ray->deltadist_x;
-            ray->map_x += ray->step_x;
-            ray->side = 0; 
-        }
-        else
-        {
-            ray->sidedist_y += ray->deltadist_y;
-            ray->map_y += ray->step_y;
-            ray->side = 1; 
-        }
-        if (ray->map_y < 0.25
-                || ray->map_x < 0.25
-                || ray->map_y > game()->map->max_y - 0.25
-                || ray->map_x > game()->map->max_x - 0.25)
-                break ;
-        else if (game()->map->map[ray->map_y][ray->map_x] == '1')
-            hit = 1;
-    }
+			ray->sidedist_x += ray->deltadist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0; 
+		}
+		else
+		{
+			ray->sidedist_y += ray->deltadist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1; 
+		}
+		if (ray->map_y < 0.25
+				|| ray->map_x < 0.25
+				|| ray->map_y > game()->map->max_y - 0.25
+				|| ray->map_x > game()->map->max_x - 0.25)
+				break ;
+		else if (game()->map->map[ray->map_y][ray->map_x] == '1')
+			hit = 1;
+	}
 }
 
 static void	calculate_wall_height(t_ray *ray, t_player *player)
@@ -122,52 +122,63 @@ static void	calculate_wall_height(t_ray *ray, t_player *player)
 	// measure dra_end does not go bellow screen (overflow)
 	if (ray->draw_end >= WINDOW_HEIGHT)
 		ray->draw_end = WINDOW_HEIGHT - 1;
+	if (ray->side == 0)
+		ray->wall_x = game()->player.pos.y + ray->wall_dist * ray->dir_y;
+	else
+		ray->wall_x = game()->player.pos.x + ray->wall_dist * ray->dir_x;
+	ray->wall_x = ray->wall_x -floor(ray->wall_x);
+}
+static void	draw_walls(t_ray *ray, int x)
+{
+	int		y;
+	int	**tex;
+	int	tex_x;
+	int	tex_y;
+	int		d;
 
-	// calculating the color basex ond side and map 
-	if (ray->side == 0) //vertical wall (x-side)
+	if (ray->side == 0)
 	{
 		if (ray->step_x > 0)
-			ray->wall_color = RED_PIXEL; // red for east walls
+			tex = game()->map->texture->ea_color;
 		else
-			ray->wall_color = GREEN_PIXEL; // green for west walls
+			tex = game()->map->texture->we_color;
 	}
 	else
 	{
 		if (ray->step_y > 0)
-			ray->wall_color = BLUE_PIXEL; // blue for north walls
+			tex = game()->map->texture->no_color;
 		else
-			ray->wall_color = YELLOW_PIXEL; // yellow for south walls
+			tex = game()->map->texture->so_color;
 	}
-}
-
-static void	draw_walls(t_ray *ray, int x)
-{
-	int y;
-
+	tex_x = ray->wall_x * game()->map->texture->width;
+	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+		tex_x = game()->map->texture->width - tex_x - 1;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		my_mlx_pixel_put(game(), x, y, ray->wall_color);
+		d = (y * 256) - (WINDOW_HEIGHT * 128) + (ray->line_height * 128);
+		tex_y = (d * game()->map->texture->height) / ray->line_height / 256;
+		my_mlx_pixel_put(game(), x, y, tex[tex_y][tex_x]);
 		y++;
 	}
 }
 
 int	raycast(t_player *player)
 {
-    t_ray   ray;
-    int     x;
+	t_ray	ray;
+	int		x;
 
-    x = 0;
-    ray = game()->ray;
-    while (x < WINDOW_WIDTH)
-    {
+	x = 0;
+	ray = game()->ray;
+	while (x < WINDOW_WIDTH)
+	{
 		
-        init_raycast(x, &ray, player);
-        set_dda(&ray, player);
-        perform_dda(&ray);
+		init_raycast(x, &ray, player);
+		set_dda(&ray, player);
+		perform_dda(&ray);
 		calculate_wall_height(&ray, player);
 		draw_walls(&ray, x);
-        x++;
-    }	
-    return (0);
+		x++;
+	}	
+	return (0);
 }

@@ -49,7 +49,7 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.03
+# define MOVE_SPEED 0.06
 # define ROTATION_SPEED 5.0
 # define MAP_SCALE 0.3
 # define FOV_ANGLE 0.66
@@ -127,8 +127,6 @@ typedef struct s_mlx
 	int		endian;
 	void	*mlx;
 	void	*win;
-	int		width;
-	int		height;
 }				t_mlx;
 
 typedef struct s_texture
@@ -140,6 +138,8 @@ typedef struct s_texture
 	char			*we_path;
 	char			*ea_path;
 	int				size;
+	int				width;
+	int				height;
 	int				**no_color;
 	int				**so_color;
 	int				**we_color;
@@ -181,6 +181,7 @@ void			clear_all(void);
 int				kill_all(void);
 void			ft_exit(char *msg, int exit_code);
 void			free_split(char **data);
+void			free_int_split(int **data);
 
 // UTILS
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);

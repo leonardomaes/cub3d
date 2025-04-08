@@ -21,6 +21,10 @@ void	init_map(t_map *map)
 	map->texture->no_path = NULL;
 	map->texture->so_path = NULL;
 	map->texture->we_path = NULL;
+	map->texture->ea_color = NULL;
+	map->texture->we_color = NULL;
+	map->texture->so_color = NULL;
+	map->texture->no_color = NULL;
 	map->map = NULL;
 	map->int_map = NULL;
 }

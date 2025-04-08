@@ -48,28 +48,35 @@ int	**get_texture(char	*path)	// Falta fazer os FREEs
 	int		x;
 	int		y;
 
-	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path, &tex.width, &tex.height);
+	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path, &game()->map->texture->width, &game()->map->texture->height);
 	if (!tex.img)
 		ft_exit("Fail to load image\n", 1);
 	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel, &tex.line_length, &tex.endian);
-	buffer = malloc(sizeof(int *) * tex.height);
+	buffer = malloc(sizeof(int *) * game()->map->texture->height);
 	if (!buffer)
 		ft_exit("Allocation failed\n", 1);
 	y = 0;
-	while (y < tex.height)
+	while (y < game()->map->texture->height)
 	{
-		buffer[y] = malloc(sizeof(int) * tex.width);
+		buffer[y] = malloc(sizeof(int) * game()->map->texture->width);
 		if (!buffer[y])
-			return (NULL);
+		{
+			while (--y >= 0)
+				free(buffer[y]);
+			free(buffer);
+			ft_exit("Allocation failed\n", 1);
+		}
 		x = 0;
-		while (x < tex.width)
+		while (x < game()->map->texture->width)
 		{
 			buffer[y][x] = get_pixel_color(tex.line_length, tex.bits_per_pixel, tex.addr, x, y);
-			printf("teste:%d\n", buffer[y][x]);
 			x++;
 		}
 		y++;
 	}
+	printf("y:%d\n%d\n", y, game()->map->texture->height);
+	printf("x:%d\n%d\n", x, game()->map->texture->width);
+	mlx_destroy_image(game()->mlx->mlx, tex.img);
 	return (buffer);
 }
 

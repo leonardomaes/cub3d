@@ -12,6 +12,31 @@
 
 #include "../includes/cub3d.h"
 
+void	free_split(char **data)
+{
+	int	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
+}
+
+void	free_texture_split(int **data)
+{
+	int	i;
+
+	i = 0;
+	while (i < game()->map->texture->height)
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
+}
 void	clear_mlx(t_mlx *mlx)
 {
 	mlx_clear_window(mlx->mlx, mlx->win);
@@ -51,6 +76,14 @@ void	clear_map(void)
 				free(game()->map->int_map[i++]);
 			free(game()->map->int_map);
 		}
+		if (game()->map->texture->no_color)
+			free_texture_split(game()->map->texture->no_color);
+		if (game()->map->texture->so_color)
+			free_texture_split(game()->map->texture->so_color);
+		if (game()->map->texture->we_color)
+			free_texture_split(game()->map->texture->we_color);
+		if (game()->map->texture->ea_color)
+			free_texture_split(game()->map->texture->ea_color);
 		if (game()->map->texture)
 		{
 			free(game()->map->texture->ea_path);
@@ -61,19 +94,6 @@ void	clear_map(void)
 		}
 		free(game()->map);
 	}
-}
-
-void	free_split(char **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i++;
-	}
-	free(data);
 }
 
 void	clear_all(void)
