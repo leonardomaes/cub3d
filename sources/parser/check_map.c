@@ -19,7 +19,7 @@ int	check_textures(t_map *map, char **content, int *i)
 
 	while (content[*i])
 	{
-		wall = ft_split(content[*i], ' ');
+		wall = ft_split(content[*i], ' ');	// issue here, the content must separate just the 2 first chars, the content can have spaces between the informations
 		if (is_texture(wall[0]) == 1)
 		{
 			if (get_textures(map, content[*i], i) == 1)
