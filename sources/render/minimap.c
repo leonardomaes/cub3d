@@ -12,6 +12,47 @@
 
 #include "../../includes/cub3d.h"
 
+/*// I suggest we copy the draw_line function into here
+void	draw_line(double x, double y, t_pos dir)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < (MAP_SCALE * 100))
+	{
+		my_mlx_pixel_put(game(), x, y, RED_PIXEL);
+		x += dir.x;
+		y += dir.y;
+	}
+}
+*/
+
+static void draw_fov(void)
+{
+	t_pos	center_pos_map;
+	t_pos	line_left;
+	t_pos	line_right;
+
+	//convert player position into mapa position
+	center_pos_map.x = (int)player->pos.x;
+	center_pos_map.y = (int)player->pos.y;
+
+	//calculate left and right FOV line using vector operations
+	line_left.x = game()->player.dir.x - game()->player.plane.x;
+	line_left.y = game()->player.dir.y - game()->player.plane.y;
+	line_right.x = game()->player.dir.x + game()->player.plane.x;
+	line_right.y = game()->player.dir.y + game()->player.plane.y;
+
+	//draw left FOV line
+	draw_line(center_pos_map.x, center_pos_map.y, line_left);
+
+	//draw centre direction line
+	draw_line(center_pos_map.x, center_pos_map.y, game()->player->dir);
+
+	//draw right FOV line
+	draw_line(center_pos_map.x, center_pos_map.y, line_right);
+}
+
 static void	draw_player(void)
 {
 	int		x;
@@ -32,7 +73,7 @@ static void	draw_player(void)
 		}
 		y++;
 	}
-	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
+//	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
 }
 
 void	draw_square(int i, int j)
@@ -77,4 +118,5 @@ void	start_minimap(void)
 		i++;
 	}
 	draw_player();
+	draw_fov();
 }
