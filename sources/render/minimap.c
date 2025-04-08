@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:40:11 by rda-cunh          #+#    #+#             */
-/*   Updated: 2025/03/21 01:30:21 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:47:55 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void draw_fov(void)
 	t_pos	line_right;
 
 	//convert player position into mapa position
-	center_pos_map.x = (int)player->pos.x;
-	center_pos_map.y = (int)player->pos.y;
+	center_pos_map.x = trunc(game()->player.pos.x);
+	center_pos_map.y = trunc(game()->player.pos.y);
 
 	//calculate left and right FOV line using vector operations
 	line_left.x = game()->player.dir.x - game()->player.plane.x;
@@ -44,13 +44,13 @@ static void draw_fov(void)
 	line_right.y = game()->player.dir.y + game()->player.plane.y;
 
 	//draw left FOV line
-	draw_line(center_pos_map.x, center_pos_map.y, line_left);
+	draw_line(player(POS_X), player(POS_Y), line_left);
 
 	//draw centre direction line
-	draw_line(center_pos_map.x, center_pos_map.y, game()->player->dir);
+	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
 
 	//draw right FOV line
-	draw_line(center_pos_map.x, center_pos_map.y, line_right);
+	draw_line(player(POS_X), player(POS_Y), line_right);
 }
 
 static void	draw_player(void)
