@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 {
 	if (argc == 2)
 	{
-		init_game(game(), argv[1]);
+		init_mlx(game(), argv[1]);
 		file_check();
 		print_map();	// Apagar
 		load_texture();

@@ -51,7 +51,8 @@
 // MAP SETTINGS
 # define MOVE_SPEED 0.06
 # define ROTATION_SPEED 5.0
-# define MAP_SCALE 0.3
+# define MAP_OFFSET 20
+# define MAP_SCALE 0.25
 # define FOV_ANGLE 0.66
 # define POS_Y 1
 # define POS_X 2
@@ -181,12 +182,16 @@ void			clear_all(void);
 int				kill_all(void);
 void			ft_exit(char *msg, int exit_code);
 void			free_split(char **data);
-void			free_int_split(int **data);
+
+// INIT
+void			init_mlx(t_cub *cub, const char *filename);
+void			init_ray(t_ray *ray);
+void			init_player(char p, int x, int y);
+
+
 
 // UTILS
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
-void			init_game(t_cub	*cub, const char *filename);
-void			init_mlx(t_cub *cub, const char *filename);
 void			setup_hook(void);
 int				player(int flag);
 // Trash
@@ -230,7 +235,6 @@ int				get_floor(t_map *map, char *line, int *i);
 
 // Map info utils
 unsigned int	get_rgb(int r, int g, int b);
-void			init_player(char p, int x, int y);
 
 /*************************************************/
 /******************* RENDER **********************/

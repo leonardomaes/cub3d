@@ -19,8 +19,8 @@ static void	draw_player(void)
 	double	offsize_x;
 	double	offsize_y;
 
-	offsize_x = game()->player.pos.x * (game()->map->offset_x * MAP_SCALE);
-	offsize_y = game()->player.pos.y * (game()->map->offset_y * MAP_SCALE);
+	offsize_x = game()->player.pos.x * (game()->map->offset_x * MAP_SCALE) + MAP_OFFSET;
+	offsize_y = game()->player.pos.y * (game()->map->offset_y * MAP_SCALE) + MAP_OFFSET;
 	y = -3;
 	while (y < 3)
 	{
@@ -32,7 +32,7 @@ static void	draw_player(void)
 		}
 		y++;
 	}
-	draw_line(player(POS_X), player(POS_Y), game()->player.dir);
+	draw_line(player(POS_X) + MAP_OFFSET, player(POS_Y) + MAP_OFFSET, game()->player.dir);
 }
 
 void	draw_square(int i, int j)
@@ -42,8 +42,8 @@ void	draw_square(int i, int j)
 	double	offsize_x;
 	double	offsize_y;
 
-	offsize_x = j * (game()->map->offset_x * MAP_SCALE);
-	offsize_y = i * (game()->map->offset_y * MAP_SCALE);
+	offsize_x = j * (game()->map->offset_x * MAP_SCALE) + MAP_OFFSET;
+	offsize_y = i * (game()->map->offset_y * MAP_SCALE) + MAP_OFFSET;
 	y = 1;
 	while (y < (MAP_SCALE * 100))
 	{
