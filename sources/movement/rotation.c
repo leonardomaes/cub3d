@@ -73,3 +73,46 @@ void	rotate_key(int key)
 	game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
 }
 
+int	handle_mouse_move(int x, int y, void *param)
+{
+	int		prev_x;
+	int		delta;
+	double	angle; 
+
+	prev_x = -1;
+	//ignore first mouse position and out of window values
+	if (prev_x == -1)
+	{
+		prev_x = x;
+		return (0);
+	}
+
+	//calculate the delta value (mouse movement)
+	delta = x - prev_x;
+
+	//rotates if there is a movement
+	if (delta != 0)
+	{
+		//the rotation is based of the value of delta and adjusted with the MOUSE_SENSIBILITY (macro)
+		game()->player.rotation -= delta * MOUSE_SENSIBILITY;
+		//doing the mormalization of the angle (like in rotate_key)
+		if (game()->player.rotation < 0)
+			game()->player.rotation += 360;
+		else if (game()->player.rotation > 360)
+			game()->player.rotation -= 360;
+		//updating the direction vector
+		angle = get_radian(game()->player.rotation);
+		game()->player.dir.x = cos(angle);
+		game()->player.dir.y = -sin(angle);
+		//updating the camera vector (perpenticular to direction vector)
+		game()->player.plane.x = -game()->player.dir.y * FOV_ANGLE;
+		game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
+	}
+
+	//center the mouse cursor in the window (this is optional) - to check if this works of or not
+	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		prev_x = WINDOW_WIDTH / 2;
+	return (0);
+}
+
+

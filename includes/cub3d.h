@@ -51,6 +51,7 @@
 // MAP SETTINGS
 # define MOVE_SPEED 0.03
 # define ROTATION_SPEED 5.0
+# define MOUSE_SENSIBILITY 0.1
 # define MAP_SCALE 0.3
 # define FOV_ANGLE 0.66
 # define POS_Y 1
