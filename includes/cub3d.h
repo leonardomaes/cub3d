@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:53:51 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.03
+# define MOVE_SPEED 0.05
 # define ROTATION_SPEED 5.0
 # define MOUSE_SENSIBILITY 0.1
 # define MAP_SCALE 0.3
@@ -265,6 +265,7 @@ void			move_forward(void);
 
 // Rotation
 void			rotate_key(int key);
+int				handle_mouse_move(int x, int y, void *param);
 
 
 #endif

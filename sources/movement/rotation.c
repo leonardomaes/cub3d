@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/20 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/04/10 19:43:54 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,19 @@ void	rotate_key(int key)
 
 int	handle_mouse_move(int x, int y, void *param)
 {
-	int		prev_x;
+	static int	prev_x;
 	int		delta;
-	double	angle; 
+	double	angle;
 
-	prev_x = -1;
+	(void)y;
+	(void)param;
+	prev_x = WINDOW_WIDTH / 2;
 	//ignore first mouse position and out of window values
-	if (prev_x == -1)
+	/*if (prev_x == WINDOW_WIDTH / 2)
 	{
 		prev_x = x;
 		return (0);
-	}
+	}*/
 
 	//calculate the delta value (mouse movement)
 	delta = x - prev_x;
@@ -96,7 +98,7 @@ int	handle_mouse_move(int x, int y, void *param)
 		//the rotation is based of the value of delta and adjusted with the MOUSE_SENSIBILITY (macro)
 		game()->player.rotation -= delta * MOUSE_SENSIBILITY;
 		//doing the mormalization of the angle (like in rotate_key)
-		if (game()->player.rotation < 0)
+		if (game()->player.rotation < 1)
 			game()->player.rotation += 360;
 		else if (game()->player.rotation > 360)
 			game()->player.rotation -= 360;
