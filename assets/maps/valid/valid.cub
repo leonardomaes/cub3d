@@ -1,7 +1,7 @@
-SO ./assets/textures/mossy.xpm
-NO ./assets/textures/mossy.xpm
-WE ./assets/textures/mossy.xpm
-EA ./assets/textures/mossy.xpm
+NO assets/textures/grey_stone.xpm
+SO assets/textures/purple_stone.xpm
+WE assets/textures/red_brick.xpm
+EA assets/textures/wood.xpm
 
 F 10,10,10
 C 100,100,100

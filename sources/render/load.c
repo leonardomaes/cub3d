@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/13 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/04/11 19:01:36 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	draw_line(double x, double y, t_pos dir)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < (MAP_SCALE * 100))
-	{
-		my_mlx_pixel_put(game(), x, y, RED_PIXEL);
-		x += dir.x;
-		y += dir.y;
-	}
-}
 
 double	get_radian(int angle)
 {
