@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/11 19:02:38 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/11 19:21:17 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 
 /***********************************************/
-/*					Defines						*/
+/*					Defines					   */
 /***********************************************/
 
 // WINDOW SETTINGS
@@ -49,8 +49,9 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.06
+# define MOVE_SPEED 0.04
 # define ROTATION_SPEED 5.0
+# define MOUSE_SENSIBILITY 0.1
 # define MAP_OFFSET 20
 # define MAP_SCALE 0.25
 # define FOV_ANGLE 0.66
@@ -80,7 +81,7 @@
 # define CAM_X 12
 
 /***********************************************/
-/*					Structs						*/
+/*					Structs					   */
 /***********************************************/
 
 typedef struct s_ray
@@ -169,7 +170,7 @@ typedef struct s_cub
 }				t_cub;
 
 /***********************************************/
-/*				Declarations					*/
+/*				Declarations			       */
 /***********************************************/
 
 // MAIN
@@ -269,6 +270,6 @@ void			move_forward(void);
 
 // Rotation
 void			rotate_key(int key);
-
+int				handle_mouse_move(int x, int y, void *param);
 
 #endif
