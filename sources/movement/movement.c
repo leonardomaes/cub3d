@@ -17,19 +17,7 @@ int	is_key(int key)
 	return (key == XK_w || key == XK_s || key == XK_a || key == XK_d || key == XK_Left || key == XK_Right);
 }
 
-/* static int	valid_move(double new_x, double new_y)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)new_x;
-	map_y = (int)new_y;
-	if (game()->map->map[map_y][map_x] == '1')
-		return (printf("hit\n"), 0);
-	return (1);
-}
-
-void	move_key(int key)
+/* void	move_key(int key)
 {
 	t_pos	new;
 

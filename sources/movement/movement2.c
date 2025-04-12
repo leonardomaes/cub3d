@@ -19,8 +19,18 @@ static int	valid_move(double new_x, double new_y)
 
 	map_x = (int)new_x;
 	map_y = (int)new_y;
+	if (game()->map->map[map_y][map_x] == '1' || game()->map->map[map_y][map_x] == ' ')
+		return (printf("hit\n"), 0);
+	
+/* 	map_x = (int)(new_x - game()->player.plane.x);		// Verifica esquerda
+	map_y = (int)(new_y - game()->player.plane.y);
 	if (game()->map->map[map_y][map_x] == '1')
 		return (printf("hit\n"), 0);
+
+	map_x = (int)(new_x + game()->player.plane.x);		// Verifica Direita
+	map_y = (int)(new_y + game()->player.plane.y);
+	if (game()->map->map[map_y][map_x] == '1')
+		return (printf("hit\n"), 0); */
 	return (1);
 }
 
@@ -31,11 +41,11 @@ void	move_forward(void)
 	double		x_offset;
 	double		y_offset;
 
-	x_offset = (PLAYER_OFFSET * round(game()->player.dir.x));
-	y_offset = (PLAYER_OFFSET * round(game()->player.dir.y));
+	x_offset = (PLAYER_OFFSET * game()->player.dir.x);
+	y_offset = (PLAYER_OFFSET * game()->player.dir.y);
 	new_x = game()->player.pos.x + game()->player.dir.x * MOVE_SPEED;
 	new_y = game()->player.pos.y + game()->player.dir.y * MOVE_SPEED;
-	if (valid_move(new_x + x_offset, new_y + y_offset))
+	if (valid_move(new_x + x_offset, new_y + y_offset) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x - game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y - game()->player.plane.y))) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x + game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y + game()->player.plane.y))))
 	{
 		game()->player.pos.x = new_x;
 		game()->player.pos.y = new_y;
@@ -53,11 +63,11 @@ void	move_backward(void)
 	double		x_offset;
 	double		y_offset;
 
-	x_offset = (PLAYER_OFFSET * round(game()->player.dir.x));
-	y_offset = (PLAYER_OFFSET * round(game()->player.dir.y));
+	x_offset = (PLAYER_OFFSET * game()->player.dir.x);
+	y_offset = (PLAYER_OFFSET * game()->player.dir.y);
 	new_x = game()->player.pos.x - game()->player.dir.x * MOVE_SPEED;
 	new_y = game()->player.pos.y - game()->player.dir.y * MOVE_SPEED;
-	if (valid_move(new_x - x_offset, new_y - y_offset))
+	if (valid_move(new_x - x_offset, new_y - y_offset) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x - game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y - game()->player.plane.y))) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x + game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y + game()->player.plane.y))))
 	{
 		game()->player.pos.x = new_x;
 		game()->player.pos.y = new_y;
@@ -73,11 +83,11 @@ void	move_left(void)
 	double		x_offset;
 	double		y_offset;
 
-	x_offset = (PLAYER_OFFSET * round(game()->player.dir.y));
-	y_offset = (PLAYER_OFFSET * round(game()->player.dir.x));
+	x_offset = (PLAYER_OFFSET * game()->player.dir.y);
+	y_offset = (PLAYER_OFFSET * game()->player.dir.x);
 	new_x = game()->player.pos.x + game()->player.dir.y * MOVE_SPEED;
 	new_y = game()->player.pos.y - game()->player.dir.x * MOVE_SPEED;
-	if (valid_move(new_x + x_offset, new_y - y_offset))
+	if (valid_move(new_x + x_offset, new_y - y_offset) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x - game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y - game()->player.plane.y))))
 	{
 		game()->player.pos.x = new_x;
 		game()->player.pos.y = new_y;
@@ -93,11 +103,11 @@ void	move_right(void)
 	double		x_offset;
 	double		y_offset;
 
-	x_offset = (PLAYER_OFFSET * round(game()->player.dir.y));
-	y_offset = (PLAYER_OFFSET * round(game()->player.dir.x));
+	x_offset = (PLAYER_OFFSET * game()->player.dir.y);
+	y_offset = (PLAYER_OFFSET * game()->player.dir.x);
 	new_x = game()->player.pos.x - game()->player.dir.y * MOVE_SPEED;
 	new_y = game()->player.pos.y + game()->player.dir.x * MOVE_SPEED;
-	if (valid_move(new_x - x_offset, new_y + y_offset))
+	if (valid_move(new_x - x_offset, new_y + y_offset) && valid_move(new_x + (PLAYER_OFFSET * (game()->player.dir.x + game()->player.plane.x)), new_y + (PLAYER_OFFSET * (game()->player.dir.y + game()->player.plane.y))))
 	{
 		game()->player.pos.x = new_x;
 		game()->player.pos.y = new_y;

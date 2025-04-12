@@ -56,9 +56,9 @@ void	setup_hook(void)
 {
 	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
 	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
-	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); // this centers the mouse on the window in the biggining of the game (to check if is needed or not)
-	mlx_hook(game()->mlx->win, MotionNotify, PointerMotionMask, handle_mouse_move, NULL); // hook for mause handling
-	mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win); // this simply hides the mouse pointer in the game (to check if is needed)
+	// mlx_mouse_move(game()->mlx->mlx, game()->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); // this centers the mouse on the window in the biggining of the game (to check if is needed or not)
+	// mlx_hook(game()->mlx->win, MotionNotify, PointerMotionMask, handle_mouse_move, NULL); // hook for mause handling
+	// mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win); // this simply hides the mouse pointer in the game (to check if is needed)
 	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
 	mlx_loop(game()->mlx->mlx);
 }
