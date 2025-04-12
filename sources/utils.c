@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/11 19:22:47 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:52:10 by lmaes            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,22 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	setup_hook(void)
+/* void	setup_hook(void)
 {
 	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
 	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
 	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
+	mlx_loop(game()->mlx->mlx);
+} */
+
+void	setup_hook(void)
+{
+	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
+	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
 	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); // this centers the mouse on the window in the biggining of the game (to check if is needed or not)
 	mlx_hook(game()->mlx->win, MotionNotify, PointerMotionMask, handle_mouse_move, NULL); // hook for mause handling
 	mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win); // this simply hides the mouse pointer in the game (to check if is needed)
+	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
 	mlx_loop(game()->mlx->mlx);
 }
+

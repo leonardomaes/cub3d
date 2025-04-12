@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/11 19:21:17 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <unistd.h>
 
 /***********************************************/
-/*					Defines					   */
+/*					Defines						*/
 /***********************************************/
 
 // WINDOW SETTINGS
@@ -49,9 +49,10 @@
 # define GRAY_PIXEL 0xAAAAAA
 
 // MAP SETTINGS
-# define MOVE_SPEED 0.04
+# define MOVE_SPEED 0.05
 # define ROTATION_SPEED 5.0
 # define MOUSE_SENSIBILITY 0.1
+# define PLAYER_OFFSET 0.25
 # define MAP_OFFSET 20
 # define MAP_SCALE 0.25
 # define FOV_ANGLE 0.66
@@ -81,7 +82,7 @@
 # define CAM_X 12
 
 /***********************************************/
-/*					Structs					   */
+/*					Structs						*/
 /***********************************************/
 
 typedef struct s_ray
@@ -170,7 +171,7 @@ typedef struct s_cub
 }				t_cub;
 
 /***********************************************/
-/*				Declarations			       */
+/*				Declarations					*/
 /***********************************************/
 
 // MAIN
@@ -195,6 +196,8 @@ void			init_player(char p, int x, int y);
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			setup_hook(void);
 int				player(int flag);
+
+
 // Trash
 void			print_map(void);
 
@@ -247,9 +250,9 @@ int				start_game(void);
 // LOAD
 void			load_texture(void);
 double			get_radian(int angle);
+void			draw_line(double x, double y, t_pos dir);
 
 // Minimap
-void			draw_line(double x, double y, t_pos dir);
 void			start_minimap(void);
 
 //Raycast

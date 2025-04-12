@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/11 19:19:52 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:52:10 by lmaes            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	rotate_key(int key)
 	game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
 }
 
-
 int	handle_mouse_move(int x, int y, void *param)
 {
 	static int	prev_x;
@@ -82,8 +81,13 @@ int	handle_mouse_move(int x, int y, void *param)
 
 	(void)y;
 	(void)param;
-	//assign prev_x as the center of the screen
 	prev_x = WINDOW_WIDTH / 2;
+	//ignore first mouse position and out of window values
+	/*if (prev_x == WINDOW_WIDTH / 2)
+	{
+		prev_x = x;
+		return (0);
+	}*/
 
 	//calculate the delta value (mouse movement)
 	delta = x - prev_x;
