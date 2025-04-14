@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:40:11 by rda-cunh          #+#    #+#             */
-/*   Updated: 2025/04/14 00:45:34 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:13:52 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ void	start_minimap(void)
 	draw_player();
 } */
 
-static void draw_fov(void)
+static void	draw_fov(void)
 {
 	t_pos	line_left;
 	t_pos	line_right;
-	int     cell_size;
-    double  player_x;
-    double  player_y;
+	int		cell_size;
+	double	player_x;
+	double	player_y;
 
-	// Calculate cell size same as in draw_square
+	// Calculate cell size (like in draw_square)
     cell_size = floor(game()->map->minimap_scale * 100);
 
-	// Calculate player position using cell_size
+	// Calculate/adjust player position using cell_size
 	player_x = game()->player.pos.x * cell_size + MAP_OFFSET;
 	player_y = game()->player.pos.y * cell_size + MAP_OFFSET;
 
@@ -147,9 +147,11 @@ void	draw_square(int i, int j)
 		x = 0;
 		while (x < cell_size)
 		{
-			if (game()->map->map[i][j] == '1' || game()->map->int_map[i][j] == ' ')
+			if (game()->map->map[i][j] == '1'
+				|| game()->map->int_map[i][j] == ' ')
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, BLACK_PIXEL);
-			else if (game()->map->map[i][j] == '0' || is_player(game()->map->map[i][j]))
+			else if (game()->map->map[i][j] == '0'
+				|| is_player(game()->map->map[i][j]))
 				my_mlx_pixel_put(game(), offsize_x + x, offsize_y + y, GRAY_PIXEL);
 			x++;
 		}
@@ -157,19 +159,19 @@ void	draw_square(int i, int j)
 	}
 }
 
-double get_scale(void)
+static double	get_scale(void)
 {
-    int max_dim;
-    
-    max_dim = 0;
-    max_dim = fmax((double)game()->map->max_x, (double)game()->map->max_y);
-    
-    if (max_dim <= 5)
-        return (0.3);  // Larger scale for very small maps
-    else if (max_dim <= 10)
-        return (0.2);
-    else
-        return (0.12);  // Smaller scale for large maps
+	int	max_dim;
+
+	max_dim = 0;
+	max_dim = fmax((double)game()->map->max_x, (double)game()->map->max_y);
+
+	if (max_dim <= 5)
+		return (0.3);  // Larger scale for very small maps
+	else if (max_dim <= 10)
+		return (0.2);
+	else
+		return (0.12);  // Smaller scale for large maps
 }
 
 
