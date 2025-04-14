@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:11 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:00:27 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct s_map
 	int			**int_map;
 	char		**map;
 	t_texture	*texture;	// info das texturas
+	double		minimap_scale;
 }				t_map;
 
 typedef struct s_cub
@@ -253,6 +254,7 @@ double			get_radian(int angle);
 void			draw_line(double x, double y, t_pos dir);
 
 // Minimap
+void			draw_square(int i, int j);
 void			start_minimap(void);
 
 //Raycast
