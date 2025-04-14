@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/14 19:00:27 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/15 00:24:01 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,9 @@ int				raycast(t_player *player);
 /*************************************************/
 
 // Movement
+int				is_key(int key);
+void			move_key(int key);
+void			do_key(int key);
 int				check_key(int keysym);
 
 // Movement2
