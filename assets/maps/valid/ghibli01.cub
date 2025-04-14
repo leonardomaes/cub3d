@@ -1,10 +1,10 @@
-SO ./assets/textures/mossy.xpm
-NO ./assets/textures/mossy.xpm
-WE ./assets/textures/mossy.xpm
-EA ./assets/textures/mossy.xpm
+SO ./assets/textures/brick_wall00.xpm
+NO ./assets/textures/brick_wall01.xpm
+WE ./assets/textures/brick_wall02.xpm
+EA ./assets/textures/brick_wall00.xpm
 
 F 10,10,10
-C 100,100000,100
+C 100,100,100
 
 1111111111111111111111111
 1000000000110000000000001
