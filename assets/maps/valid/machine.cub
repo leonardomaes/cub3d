@@ -1,10 +1,10 @@
-SO ./assets/textures/brick_wall00.xpm
-NO ./assets/textures/brick_wall01.xpm
-WE ./assets/textures/brick_wall02.xpm
-EA ./assets/textures/brick_wall00.xpm
+SO ./assets/textures/machine01.xpm
+NO ./assets/textures/machine02.xpm
+WE ./assets/textures/machine03.xpm
+EA ./assets/textures/oak_timber.xpm
 
-F 10,10,10
-C 100,100,100
+F 186,135,89
+C 80,80,4
 
 1111111111111111111111111
 1000000000110000000000001
