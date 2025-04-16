@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/16 18:23:46 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:38:58 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,15 @@ typedef struct s_cub
 t_cub			*game(void);
 
 // FREE
+void			free_split(char **data);
+void			free_texture_split(int **data);
 void			clear_mlx(t_mlx *mlx);
+
 void			clear_map(void);
 void			clear_all(void);
 int				kill_all(void);
 void			ft_exit(char *msg, int exit_code);
-void			free_split(char **data);
+
 
 // INIT
 void			init_mlx(t_cub *cub, const char *filename);
@@ -256,6 +259,7 @@ void			draw_line(double x, double y, t_pos dir);
 
 // Minimap
 void			draw_square(int i, int j);
+double			get_scale(void);
 void			start_minimap(void);
 
 //Raycast
