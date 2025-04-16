@@ -6,11 +6,11 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/14 18:48:59 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:53:08 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	player(int flag)
 {

@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/04 15:42:56 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:30:56 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static void	init_raycast(int x, t_ray *ray, t_player *player)
-{
-	init_ray(ray); // init ray struct values
-	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-	ray->dir_x = player->dir.x + player->plane.x * ray->camera_x;
-	ray->dir_y = player->dir.y + player->plane.y * ray->camera_x;
-	ray->map_x = (int)player->pos.x;
-	ray->map_y = (int)player->pos.y;
-	ray->deltadist_x = fabs(1 / ray->dir_x);
-	ray->deltadist_y = fabs(1 / ray->dir_y);
-}
 
 static void	set_dda(t_ray *ray, t_player *player)
 {
@@ -34,7 +22,8 @@ static void	set_dda(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_x = 1;
-		ray->sidedist_x = (ray->map_x + 1.0 - player->pos.x) * ray->deltadist_x;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->pos.x)
+			* ray->deltadist_x;
 	}
 	if (ray->dir_y < 0)
 	{
@@ -44,7 +33,8 @@ static void	set_dda(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_y = 1;
-		ray->sidedist_y = (ray->map_y + 1.0 - player->pos.y) * ray->deltadist_y;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->pos.y)
+			* ray->deltadist_y;
 	}
 }
 
@@ -79,21 +69,15 @@ static void	perform_dda(t_ray *ray)
 static void	calculate_wall_height(t_ray *ray, t_player *player)
 {
 	(void)player;
-	// calculate perpenticular wall distante to avoid fisheye efect
-	if (ray->side == 0) // case where we hit a vertical wall (x-side)
+	if (ray->side == 0)
 		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
-	else // case where we hit a horizontal wall (y-side)
+	else
 		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
-	// calculate height of the wall line to draw it
 	ray->line_height = (int)(WINDOW_HEIGHT / ray->wall_dist);
-	// calculate lowest pixel of the wall slice and centers the wall on screen
 	ray->draw_start = -(ray->line_height) / 2 + WINDOW_HEIGHT / 2;
-	// ensure draw_start does not go above the screen
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	// calculate highest pixel of the wall slice
 	ray->draw_end = ray->line_height / 2 + WINDOW_HEIGHT / 2;
-	// measure dra_end does not go bellow screen (overflow)
 	if (ray->draw_end >= WINDOW_HEIGHT)
 		ray->draw_end = WINDOW_HEIGHT - 1;
 	if (ray->side == 0)
@@ -102,6 +86,7 @@ static void	calculate_wall_height(t_ray *ray, t_player *player)
 		ray->wall_x = game()->player.pos.x + ray->wall_dist * ray->dir_x;
 	ray->wall_x = ray->wall_x - floor(ray->wall_x);
 }
+
 static void	draw_walls(t_ray *ray, int x)
 {
 	int	y;
@@ -140,8 +125,8 @@ static void	draw_walls(t_ray *ray, int x)
 
 int	raycast(t_player *player)
 {
-	t_ray ray;
-	int x;
+	t_ray	ray;
+	int		x;
 
 	x = 0;
 	ray = game()->ray;

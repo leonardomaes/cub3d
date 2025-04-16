@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
+#include "../../includes/cub3d.h"
 void	init_mlx(t_cub *cub, const char *filename)
 {
 	char	*title;
@@ -55,6 +54,18 @@ void	init_ray(t_ray *ray) // change this for the init functions
 	ray->draw_start = 0;
 	ray->draw_end = 0;
 	ray->wall_color = 0; 
+}
+
+void	init_raycast(int x, t_ray *ray, t_player *player)
+{
+	init_ray(ray); // init ray struct values
+	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+	ray->dir_x = player->dir.x + player->plane.x * ray->camera_x;
+	ray->dir_y = player->dir.y + player->plane.y * ray->camera_x;
+	ray->map_x = (int)player->pos.x;
+	ray->map_y = (int)player->pos.y;
+	ray->deltadist_x = fabs(1 / ray->dir_x);
+	ray->deltadist_y = fabs(1 / ray->dir_y);
 }
 
 void	init_player(char p, int x, int y)

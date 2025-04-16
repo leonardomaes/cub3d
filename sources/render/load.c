@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/13 12:52:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:41:31 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ int	**get_texture(char	*path)	// Falta fazer os FREEs
 	int		x;
 	int		y;
 
-	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path, &game()->map->texture->width, &game()->map->texture->height);
+	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path,
+			&game()->map->texture->width, &game()->map->texture->height);
 	if (!tex.img)
 		ft_exit("Fail to load image\n", 1);
-	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel, &tex.line_length, &tex.endian);
+	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel,
+			&tex.line_length, &tex.endian);
 	buffer = malloc(sizeof(int *) * game()->map->texture->height);
 	if (!buffer)
 		ft_exit("Allocation failed\n", 1);
@@ -69,7 +71,8 @@ int	**get_texture(char	*path)	// Falta fazer os FREEs
 		x = 0;
 		while (x < game()->map->texture->width)
 		{
-			buffer[y][x] = get_pixel_color(tex.line_length, tex.bits_per_pixel, tex.addr, x, y);
+			buffer[y][x] = get_pixel_color(tex.line_length,
+					tex.bits_per_pixel, tex.addr, x, y);
 			x++;
 		}
 		y++;
@@ -80,7 +83,7 @@ int	**get_texture(char	*path)	// Falta fazer os FREEs
 	return (buffer);
 }
 
-void	load_texture()
+void	load_texture(void)
 {
 	game()->map->texture->no_color = get_texture(game()->map->texture->no_path);
 	game()->map->texture->so_color = get_texture(game()->map->texture->so_path);

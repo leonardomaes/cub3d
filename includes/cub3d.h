@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/15 00:24:01 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:23:46 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void			free_split(char **data);
 // INIT
 void			init_mlx(t_cub *cub, const char *filename);
 void			init_ray(t_ray *ray);
+void			init_raycast(int x, t_ray *ray, t_player *player);
 void			init_player(char p, int x, int y);
 
 
