@@ -20,7 +20,7 @@ int	count_lines(void)
 
 	fd = open(game()->filename, O_RDONLY);
 	if (fd == -1)
-		ft_exit("ERROR: Unable to open file!\n", 1);
+		ft_exit("Error\nUnable to open file!\n", 1);
 	lines = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -42,12 +42,12 @@ char	**read_lines(int lines)
 
 	map = (char **)malloc(sizeof(char *) * (lines + 1));
 	if (!map)
-		ft_exit("ERROR: Memory allocation failed!\n", 1);
+		ft_exit("Error\nMemory allocation failed!\n", 1);
 	fd = open(game()->filename, O_RDONLY);
 	if (fd == -1)
 	{
 		free(map);
-		ft_exit("ERROR: Unable to open file!\n", 1);
+		ft_exit("Error\nUnable to open file!\n", 1);
 	}
 	i = 0;
 	line = get_next_line(fd);
@@ -61,7 +61,7 @@ char	**read_lines(int lines)
 				free(map[i]);
 			free(map);
 			close(fd);
-			ft_exit("ERROR: Memory allocation failed!\n", 1);
+			ft_exit("Error\nMemory allocation failed!\n", 1);
 		}
 		i++;
 		line = get_next_line(fd);
@@ -77,10 +77,10 @@ void	read_map(void)
 
 	lines = count_lines();
 	if (lines == 0)
-		ft_exit("ERROR: Empty file!\n", 1);
+		ft_exit("Error\nEmpty file!\n", 1);
 	game()->map = (t_map *)malloc(sizeof(t_map));
 	if (!game()->map)
-		ft_exit("ERROR: Memory allocation failed!\n", 1);
+		ft_exit("Error\nMemory allocation failed!\n", 1);
 	game()->map->layout = read_lines(lines);
 	parse_map(game()->map, game()->map->layout);
 }
@@ -91,7 +91,7 @@ int	file_check(void)
 
 	size = ft_strlen(game()->filename);
 	if (ft_strncmp(game()->filename + (size - 4), ".cub", 4) != 0)
-		ft_exit("ERROR:File specified in wrong format!\n", 1);
+		ft_exit("Error\nFile specified in wrong format!\n", 1);
 	read_map();
 	return (0);
 }

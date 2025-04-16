@@ -25,7 +25,6 @@ int	main(int argc, char *argv[])
 	{
 		init_mlx(game(), argv[1]);
 		file_check();
-		print_map();	// Apagar
 		load_texture();
 		setup_hook();
 	}
@@ -37,4 +36,3 @@ int	main(int argc, char *argv[])
 	clear_all();
 	return (0);
 }
-

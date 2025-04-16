@@ -40,13 +40,13 @@
 # define FOV 66.00
 
 // Colors
-# define RED_PIXEL 0xFF0000
-# define BLUE_PIXEL 0x0000FF
-# define GREEN_PIXEL 0x00FF00
-# define YELLOW_PIXEL 0xFFFF00
-# define WHITE_PIXEL 0xFFFFFF
-# define BLACK_PIXEL 0x000000
-# define GRAY_PIXEL 0xAAAAAA
+# define RED_P 0xFF0000
+# define BLUE_P 0x0000FF
+# define GREEN_P 0x00FF00
+# define YELLOW_P 0xFFFF00
+# define WHITE_P 0xFFFFFF
+# define BLACK_P 0x000000
+# define GRAY_P 0xAAAAAA
 
 // MAP SETTINGS
 # define MOVE_SPEED 0.05
@@ -87,24 +87,24 @@
 
 typedef struct s_ray
 {
-	double	camera_x; //helps mapping the vertical screen collumns to camera plane coordinates (it ranges from -1 to 1)
-	double	dir_x; 
-	double	dir_y; // sets the direction vectors of each ray (used for DDA calculations)
+	double	camera_x;
+	double	dir_x;
+	double	dir_y;
 	int		map_x;
-	int 	map_y; // current map celll (int pair of number), used to check collisions
+	int		map_y;
 	int		step_x;
-	int		step_y; // determines the movement directtion in the game grid (1 for right/down, -1 for left/up)
+	int		step_y;
 	double	sidedist_x;
-	double	sidedist_y; // used in dda: distance from player position to the x/y gridline
+	double	sidedist_y;
 	double	deltadist_x;
-	double	deltadist_y; // used in dda: distance between grid lines in ray direction
-	double	wall_dist; // perpenticular distance to hit wall (used to correct perspective)
-	double	wall_x; // exact position on wall (for texture porpuses)
-	int		side; // wall side flag (0 for x side (vertical) and 1 for y side (horizontal)): used for shading and texture orientation
+	double	deltadist_y;
+	double	wall_dist;
+	double	wall_x;
+	int		side;
 	int		line_height;
 	int		draw_start;
-	int		draw_end; // walls rendering parameters
-	int		wall_color; // for testing porpuses with colors
+	int		draw_end;
+	int		wall_color;
 }				t_ray;
 
 typedef struct s_pos
@@ -156,7 +156,6 @@ typedef struct s_map
 	int			max_y;
 	double		offset_x;
 	double		offset_y;
-	int			**int_map;
 	char		**map;
 	t_texture	*texture;	// info das texturas
 	double		minimap_scale;
@@ -190,14 +189,12 @@ void			free_split(char **data);
 void			init_mlx(t_cub *cub, const char *filename);
 void			init_ray(t_ray *ray);
 void			init_player(char p, int x, int y);
-
-
+void			init_raycast(int x, t_ray *ray, t_player *player);
 
 // UTILS
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			setup_hook(void);
 int				player(int flag);
-
 
 // Trash
 void			print_map(void);

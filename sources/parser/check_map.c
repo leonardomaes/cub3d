@@ -35,9 +35,7 @@ int	check_textures(t_map *map, char **content, int *i)
 
 	while (content[*i])
 	{
-		//wall = ft_split(content[*i], ' ');	// issue here, the content must separate just the 2 first chars, the content can have spaces between the informations
 		wall = get_split_line(content[*i]);
-		//printf("0->%s", wall);
 		if (is_texture(wall) == 1)
 		{
 			if (get_textures(map, content[*i], i) == 1)
@@ -83,7 +81,7 @@ int	check_middle(char **content, int *j)
 {
 	int	player;
 	int	x;
-	int y;
+	int	y;
 	int	max_width;
 
 	player = 0;
@@ -100,8 +98,8 @@ int	check_middle(char **content, int *j)
 			if (content[y][x + 1] == '\n'
 				&& content[y][x] != '1')
 				return (1);
-			if (content[y][x] == '0' && (is_map(content[y-1][x]) == 1
-				|| is_map(content[y+1][x]) == 1))
+			if (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1
+				|| is_map(content[y + 1][x]) == 1))
 				return (1);
 			if (is_player(content[y][x]))
 			{
@@ -130,7 +128,7 @@ int	check_map_conditions(char **content, int *i)
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
-	if (check_middle(content + j, &j) == 1)	// J = Y
+	if (check_middle(content + j, &j) == 1)
 		return (1);
 	if (check_top_bottom(content[j]) == 1)
 		return (1);

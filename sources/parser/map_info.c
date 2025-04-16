@@ -116,12 +116,10 @@ char	**get_colors(char *line)
 		i++;
 	}
 	clean[j] = '\0';
-
 	result[1] = clean;
 	result[2] = NULL;
 	return (result);
 }
-
 
 int	get_floor(t_map *map, char *line, int *i)
 {
@@ -130,7 +128,6 @@ int	get_floor(t_map *map, char *line, int *i)
 
 	if (line[0] == '\n')
 		return ((*i)++, 0);
-	//floor = ft_split(line, ' ');	// Floor deve chegar ja formatado
 	floor = get_colors(line);
 	if (!floor)
 		return (1);

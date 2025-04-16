@@ -10,14 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	player(int flag)
 {
 	if (flag == POS_Y)
-		return (game()->player.pos.y * (game()->map->offset_y * game()->map->minimap_scale));
+		return (game()->player.pos.y
+			* (game()->map->offset_y * game()->map->minimap_scale));
 	else if (flag == POS_X)
-		return (game()->player.pos.x * (game()->map->offset_x * game()->map->minimap_scale));
+		return (game()->player.pos.x
+			* (game()->map->offset_x * game()->map->minimap_scale));
 	else if (flag == DIR_X)
 		return (game()->player.dir.x);
 	else if (flag == DIR_Y)
@@ -44,22 +46,15 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-/* void	setup_hook(void)
-{
-	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
-	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
-	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
-	mlx_loop(game()->mlx->mlx);
-} */
-
 void	setup_hook(void)
 {
 	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
 	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
-	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); // this centers the mouse on the window in the biggining of the game (to check if is needed or not)
-	mlx_hook(game()->mlx->win, MotionNotify, PointerMotionMask, handle_mouse_move, NULL); // hook for mause handling
-	mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win); // this simply hides the mouse pointer in the game (to check if is needed)
+	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win,
+		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	mlx_hook(game()->mlx->win, MotionNotify,
+		PointerMotionMask, handle_mouse_move, NULL);
+	mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win);
 	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
 	mlx_loop(game()->mlx->mlx);
 }
-
