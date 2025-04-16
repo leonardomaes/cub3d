@@ -59,7 +59,7 @@ int	have_textures(t_texture *t)
 int	is_map(char c)
 {
 	if (!c || c == '0' || c == '1' || c == 'N'
-		|| c == 'E' || c == 'S' || c == 'W')
+		|| c == 'E' || c == 'S' || c == 'W' || c == ' ')
 		return (0);
 	return (1);
 }

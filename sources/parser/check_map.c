@@ -12,38 +12,53 @@
 
 #include "../../includes/cub3d.h"
 
+char	*get_split_line(const char *s)
+{
+	char	**buff;
+	char	*result;
+
+	result = NULL;
+	buff = ft_split(s, ' ');
+	if (!buff)
+		return (NULL);
+	result = ft_spacetrim(buff[0]);
+	if (result[0] == '\0')
+		result = ft_strdup(buff[0]);
+	free_split(buff);
+	return (result);
+}
+
 int	check_textures(t_map *map, char **content, int *i)
 {
-	char	**wall;
+	char	*wall;
 	char	*temp;
 
 	while (content[*i])
 	{
-		wall = ft_split(content[*i], ' ');	// issue here, the content must separate just the 2 first chars, the content can have spaces between the informations
-		printf("0->%s ", wall[0]);
-		printf("1->%s", wall[1]);
-		if (is_texture(wall[0]) == 1)
+		//wall = ft_split(content[*i], ' ');	// issue here, the content must separate just the 2 first chars, the content can have spaces between the informations
+		wall = get_split_line(content[*i]);
+		//printf("0->%s", wall);
+		if (is_texture(wall) == 1)
 		{
 			if (get_textures(map, content[*i], i) == 1)
-				return (free_split(wall), 1);
+				return (free(wall), 1);
 		}
-		else if (is_floor(wall[0]) == 1)
+		else if (is_floor(wall) == 1)
 		{
 			if (get_floor(map, content[*i], i) == 1)
-				return (free_split(wall), 1);
+				return (free(wall), 1);
 		}
 		else
-			return (free_split(wall), 1);
+			return (free(wall), 1);
 		temp = ft_chartrim(content[*i], '\n');
 		if (is_map_line(temp) == 0 && content[*i][0] != '\n')
 		{
-			free_split(wall);
+			free(wall);
 			free(temp);
 			break ;
 		}
 		free(temp);
-		free_split(wall);
-		printf("\n");
+		free(wall);
 	}
 	if (have_textures(map->texture) == 1)
 		return (1);
