@@ -17,7 +17,7 @@ void	draw_line(double x, double y, t_pos dir)
 	int	i;
 
 	i = 0;
-	while (i++ < (MAP_SCALE * 100))
+	while (i++ < (game()->map->minimap_scale * 100))
 	{
 		my_mlx_pixel_put(game(), x, y, RED_PIXEL);
 		x += dir.x;

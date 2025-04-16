@@ -15,9 +15,9 @@
 int	player(int flag)
 {
 	if (flag == POS_Y)
-		return (game()->player.pos.y * (game()->map->offset_y * MAP_SCALE));
+		return (game()->player.pos.y * (game()->map->offset_y * game()->map->minimap_scale));
 	else if (flag == POS_X)
-		return (game()->player.pos.x * (game()->map->offset_x * MAP_SCALE));
+		return (game()->player.pos.x * (game()->map->offset_x * game()->map->minimap_scale));
 	else if (flag == DIR_X)
 		return (game()->player.dir.x);
 	else if (flag == DIR_Y)

@@ -54,7 +54,7 @@ void	get_map2(t_map	*map, char **content, int i)
 			while (j > 0)
 				free(map->map[--j]);
 			free(map->map);
-			return;
+			return ;
 		}
 		j++;
 		i++;
@@ -64,11 +64,11 @@ void	get_map2(t_map	*map, char **content, int i)
 	map->offset_y = WINDOW_HEIGHT / map->max_y;
 }
 
-void	get_map(t_map	*map, char **content, int i)
+void	get_map(t_map *map, char **content, int i)
 {
 	int	y;
-	int x;
-	int row_len;
+	int	x;
+	int	row_len;
 
 	map->int_map = (int **)malloc(sizeof(int *) * (game()->map->max_y + 1));
 	if (!map->int_map)
@@ -83,7 +83,7 @@ void	get_map(t_map	*map, char **content, int i)
 			while (y > 0)
 				free(map->int_map[--y]);
 			free(map->int_map);
-			return;
+			return ;
 		}
 		x = 0;
 		while (content[i][x])

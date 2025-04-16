@@ -179,6 +179,10 @@ void	start_minimap(void)
 	int	i;
 	int	j;
 
+	if (game()->map->max_x > MINIMAP_MAX_SIZE 
+		|| game()->map->max_y > MINIMAP_MAX_SIZE)
+		return ;
+
 	game()->map->minimap_scale = get_scale();
 	i = 0;
 	while (game()->map->map[i])
