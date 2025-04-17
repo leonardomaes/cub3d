@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:49:40 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/15 00:24:01 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:53:03 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,9 @@ void			draw_square(int i, int j);
 void			start_minimap(void);
 
 //Raycast
+void			set_dda(t_ray *ray, t_player *player);
+void			perform_dda(t_ray *ray);
+void			calculate_wall_height(t_ray *ray, t_player *player);
 int				raycast(t_player *player);
 
 /*************************************************/
