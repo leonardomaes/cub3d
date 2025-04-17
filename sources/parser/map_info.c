@@ -42,8 +42,6 @@ int	get_textures(t_map *map, char *line, int *i)
 		return (1);
 	dir = ft_spacetrim(wall[0]);
 	value = ft_spacetrim(wall[1]);
-	printf("\n-->%s\n", dir);
-	printf("-->%s\n", value);
 	if (set_textures(map, dir, value) == 1)
 		return (free_split(wall), 1);
 	free_split(wall);
@@ -55,28 +53,12 @@ int	get_textures(t_map *map, char *line, int *i)
 
 int	set_floor(t_map *map, char *fc, char *rgb)
 {
-	int				i;
-	int				j;
 	unsigned int	nbr;
 	char			**temp;
 
-	if (!fc || !rgb)
-		return (1);
 	temp = ft_split(rgb, ',');
-	i = 0;
-	while (temp[i])
-	{
-		j = 0;
-		while (temp[i][j])
-		{
-			if (ft_isdigit(temp[i][j]) == 0)
-				return (free_split(temp), 1);
-			j++;
-		}
-		i++;
-	}
-	if (i != 3)
-		return (free_split(temp), 1);
+	if (check_floors(temp) == 1)
+		return (1);
 	nbr = get_rgb(ft_atoi(temp[0]), ft_atoi(temp[1]), ft_atoi(temp[2]));
 	if (!ft_strcmp(fc, "F\0") && map->texture->floor == 0)
 		map->texture->floor = nbr;
@@ -88,12 +70,10 @@ int	set_floor(t_map *map, char *fc, char *rgb)
 	return (0);
 }
 
-char	**get_colors(char *line)
+char	**get_colors(char *line, int i, int j)
 {
 	char	**result;
 	char	*clean;
-	int		i;
-	int		j;
 
 	result = malloc(sizeof(char *) * 3);
 	if (!result)
@@ -107,8 +87,6 @@ char	**get_colors(char *line)
 	clean = malloc(ft_strlen(line) + 1);
 	if (!clean)
 		return (free(result[0]), free(result), NULL);
-	i = 0;
-	j = 0;
 	while (line[i])
 	{
 		if (!ft_isspace(line[i]))
@@ -125,15 +103,19 @@ int	get_floor(t_map *map, char *line, int *i)
 {
 	char	**floor;
 	char	*rgb;
+	int		k;
+	int		j;
 
+	k = 0;
+	j = 0;
 	if (line[0] == '\n')
 		return ((*i)++, 0);
-	floor = get_colors(line);
+	floor = get_colors(line, k, j);
 	if (!floor)
 		return (1);
-	printf("\n-->%s\n", floor[0]);
-	printf("-->%s\n", floor[1]);
 	rgb = ft_chartrim(floor[1], '\n');
+	if (!rgb || ! floor[0])
+		return (free(rgb), free_split(floor), 1);
 	if (set_floor(map, floor[0], rgb) == 1)
 		return (free(rgb), free_split(floor), 1);
 	free(rgb);

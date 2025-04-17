@@ -33,29 +33,6 @@ int	is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
 
-int	have_textures(t_texture *t)
-{
-	int	size;
-
-	size = 0;
-	if (!t || !t->ea_path || !t->no_path || !t->so_path
-		|| !t->we_path || t->ceiling == 0 || t->floor == 0)
-		return (1);
-	size = ft_strlen(t->ea_path);
-	if (ft_strncmp(t->ea_path + (size - 4), ".xpm", 4) != 0)
-		return (1);
-	size = ft_strlen(t->no_path);
-	if (ft_strncmp(t->no_path + (size - 4), ".xpm", 4) != 0)
-		return (1);
-	size = ft_strlen(t->so_path);
-	if (ft_strncmp(t->so_path + (size - 4), ".xpm", 4) != 0)
-		return (1);
-	size = ft_strlen(t->we_path);
-	if (ft_strncmp(t->we_path + (size - 4), ".xpm", 4) != 0)
-		return (1);
-	return (0);
-}
-
 int	is_map(char c)
 {
 	if (!c || c == '0' || c == '1' || c == 'N'

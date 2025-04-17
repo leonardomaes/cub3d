@@ -12,22 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-char	*get_split_line(const char *s)
-{
-	char	**buff;
-	char	*result;
-
-	result = NULL;
-	buff = ft_split(s, ' ');
-	if (!buff)
-		return (NULL);
-	result = ft_spacetrim(buff[0]);
-	if (result[0] == '\0')
-		result = ft_strdup(buff[0]);
-	free_split(buff);
-	return (result);
-}
-
 int	check_textures(t_map *map, char **content, int *i)
 {
 	char	*wall;
@@ -50,17 +34,11 @@ int	check_textures(t_map *map, char **content, int *i)
 			return (free(wall), 1);
 		temp = ft_chartrim(content[*i], '\n');
 		if (is_map_line(temp) == 0 && content[*i][0] != '\n')
-		{
-			free(wall);
-			free(temp);
-			break ;
-		}
+			return (free(wall), free(temp), have_textures(map->texture));
 		free(temp);
 		free(wall);
 	}
-	if (have_textures(map->texture) == 1)
-		return (1);
-	return (0);
+	return (have_textures(map->texture));
 }
 
 int	check_top_bottom(char *line)
@@ -77,30 +55,19 @@ int	check_top_bottom(char *line)
 	return (0);
 }
 
-int	check_middle(char **content, int *j)
+int	check_player(char **content)
 {
 	int	player;
-	int	x;
 	int	y;
-	int	max_width;
+	int	x;
 
 	player = 0;
 	y = 0;
-	max_width = 0;
 	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
 	{
 		x = 0;
 		while (content[y][x])
 		{
-			if (x == 0 && (content[y][x] != '1'
-				&& !ft_isspace(content[y][x])))
-				return (1);
-			if (content[y][x + 1] == '\n'
-				&& content[y][x] != '1')
-				return (1);
-			if (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1
-				|| is_map(content[y + 1][x]) == 1))
-				return (1);
 			if (is_player(content[y][x]))
 			{
 				player++;
@@ -108,14 +75,39 @@ int	check_middle(char **content, int *j)
 			}
 			x++;
 		}
-		if (x > max_width)
-			max_width = x;
 		y++;
 	}
 	if (player != 1)
 		return (1);
-	game()->map->max_x = max_width;
 	game()->map->max_y = y + 2;
+	return (0);
+}
+
+int	check_middle(char **content, int *j)
+{
+	int	x;
+	int	y;
+	int	max_width;
+
+	y = 0;
+	max_width = 0;
+	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
+	{
+		x = 0;
+		while (content[y][x])
+		{
+			if ((x == 0 && (content[y][x] != '1' && !ft_isspace(content[y][x])))
+					|| (content[y][x + 1] == '\n' && content[y][x] != '1')
+					|| (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1
+						|| is_map(content[y + 1][x]) == 1)))
+				return (1);
+			x++;
+		}
+		if (x > max_width)
+			max_width = x;
+		y++;
+	}
+	game()->map->max_x = max_width;
 	*j += y;
 	return (0);
 }
@@ -128,6 +120,8 @@ int	check_map_conditions(char **content, int *i)
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
+	if (check_player(content + j) == 1)
+		return (1);
 	if (check_middle(content + j, &j) == 1)
 		return (1);
 	if (check_top_bottom(content[j]) == 1)
@@ -135,19 +129,5 @@ int	check_map_conditions(char **content, int *i)
 	j++;
 	if (content[j])
 		return (1);
-	return (0);
-}
-
-int	check_valid_chars(char **content)
-{
-	int	j;
-
-	j = 1;
-	while (content[j])
-	{
-		if (is_map_line(content[j]) == 1)
-			return (1);
-		j++;
-	}
 	return (0);
 }

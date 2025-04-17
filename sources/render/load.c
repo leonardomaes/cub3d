@@ -12,19 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	draw_line(double x, double y, t_pos dir)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < (game()->map->minimap_scale * 150))
-	{
-		my_mlx_pixel_put(game(), x, y, RED_P);
-		x += dir.x;
-		y += dir.y;
-	}
-}
-
 double	get_radian(int angle)
 {
 	double	radian;
@@ -41,6 +28,19 @@ int	get_pixel_color(t_mlx tex, int x, int y)
 	return (*(int *)(tex.addr + offset));
 }
 
+t_mlx	init_tex(char *path)
+{
+	t_mlx	tex;
+
+	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path,
+			&game()->map->texture->width, &game()->map->texture->height);
+	if (!tex.img)
+		return (tex);
+	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel,
+			&tex.line_length, &tex.endian);
+	return (tex);
+}
+
 int	**get_texture(char	*path)
 {
 	t_mlx	tex;
@@ -48,12 +48,9 @@ int	**get_texture(char	*path)
 	int		x;
 	int		y;
 
-	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path,
-			&game()->map->texture->width, &game()->map->texture->height);
-	if (!tex.img)
+	tex = init_tex(path);
+	if (tex.img == NULL)
 		ft_exit("Fail to load image\n", 1);
-	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel,
-			&tex.line_length, &tex.endian);
 	buffer = malloc(sizeof(int *) * game()->map->texture->height);
 	if (!buffer)
 		ft_exit("Allocation failed\n", 1);
@@ -62,18 +59,10 @@ int	**get_texture(char	*path)
 	{
 		buffer[y] = malloc(sizeof(int) * game()->map->texture->width);
 		if (!buffer[y])
-		{
-			while (--y >= 0)
-				free(buffer[y]);
-			free(buffer);
-			ft_exit("Allocation failed\n", 1);
-		}
-		x = 0;
-		while (x < game()->map->texture->width)
-		{
+			free_map_and_exit((char **)buffer, y, -1, "Allocation failed\n");
+		x = -1;
+		while (++x < game()->map->texture->width)
 			buffer[y][x] = get_pixel_color(tex, x, y);
-			x++;
-		}
 		y++;
 	}
 	mlx_destroy_image(game()->mlx->mlx, tex.img);

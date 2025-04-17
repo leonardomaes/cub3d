@@ -40,6 +40,35 @@ char	**read_lines(int lines)
 	char	**map;
 	char	*line;
 
+	map = malloc(sizeof(char *) * (lines + 1));
+	if (!map)
+		ft_exit("Error\nMemory allocation failed!\n", 1);
+	fd = open(game()->filename, O_RDONLY);
+	if (fd == -1)
+		free_map_and_exit(map, 0, -1, "Error\nUnable to open file!\n");
+	i = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		map[i] = ft_strdup(line);
+		free(line);
+		if (!map[i])
+			free_map_and_exit(map, i, fd, "Error\nMemory allocation failed!\n");
+		i++;
+		line = get_next_line(fd);
+	}
+	map[i] = NULL;
+	close(fd);
+	return (map);
+}
+
+/* char	**read_lines(int lines)
+{
+	int		fd;
+	int		i;
+	char	**map;
+	char	*line;
+
 	map = (char **)malloc(sizeof(char *) * (lines + 1));
 	if (!map)
 		ft_exit("Error\nMemory allocation failed!\n", 1);
@@ -69,7 +98,7 @@ char	**read_lines(int lines)
 	map[i] = NULL;
 	close(fd);
 	return (map);
-}
+} */
 
 void	read_map(void)
 {

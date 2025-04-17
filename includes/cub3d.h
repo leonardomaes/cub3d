@@ -177,14 +177,6 @@ typedef struct s_cub
 // MAIN
 t_cub			*game(void);
 
-// FREE
-void			clear_mlx(t_mlx *mlx);
-void			clear_map(void);
-void			clear_all(void);
-int				kill_all(void);
-void			ft_exit(char *msg, int exit_code);
-void			free_split(char **data);
-
 // INIT
 void			init_mlx(t_cub *cub, const char *filename);
 void			init_ray(t_ray *ray);
@@ -195,9 +187,6 @@ void			init_raycast(int x, t_ray *ray, t_player *player);
 void			my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void			setup_hook(void);
 int				player(int flag);
-
-// Trash
-void			print_map(void);
 
 /*************************************************/
 /******************* PARSER **********************/
@@ -214,41 +203,46 @@ int				check_textures(t_map *map, char **content, int *i);
 int				check_top_bottom(char *line);
 int				check_middle(char **content, int *j);
 int				check_map_conditions(char **content, int *i);
-int				check_valid_chars(char **content);
 
 // Parser Conditions
 void			init_map(t_map *map);
 int				check_map(char	**content, int *i);
 void			get_map2(t_map	*map, char **content, int i);
-void			get_map(t_map	*map, char **content, int i);
 void			parse_map(t_map *map, char	**content);
 
 // Parser Utils
 int				is_texture(char *str);
 int				is_floor(char *str);
 int				is_player(char c);
-int				have_textures(t_texture *t);
 int				is_map(char c);
 int				is_map_line(char	*line);
 
 // Map info
+int				set_textures(t_map *map, char *dir, char *path);
 int				get_textures(t_map *map, char *line, int *i);
+int				set_floor(t_map *map, char *fc, char *rgb);
+char			**get_colors(char *line, int i, int j);
 int				get_floor(t_map *map, char *line, int *i);
 
 // Map info utils
 unsigned int	get_rgb(int r, int g, int b);
+int				have_textures(t_texture *t);
+char			*get_split_line(const char *s);
+int				check_valid_chars(char **content);
+int				check_floors(char **temp);
 
 /*************************************************/
 /******************* RENDER **********************/
 /*************************************************/
 
 // Render
+void			draw_line(double x, double y, t_pos dir);
+void			start_floors(void);
 int				start_game(void);
 
 // LOAD
 void			load_texture(void);
 double			get_radian(int angle);
-void			draw_line(double x, double y, t_pos dir);
 
 // Minimap
 void			draw_square(int i, int j);
@@ -279,5 +273,18 @@ void			move_forward(void);
 // Rotation
 void			rotate_key(int key);
 int				handle_mouse_move(int x, int y, void *param);
+
+/*************************************************/
+/******************** FREE ***********************/
+/*************************************************/
+
+void			free_map_and_exit(char **map, int i, int fd, char *msg);
+void			free_split(char **data);
+void			free_texture_split(int **data);
+void			clear_mlx(t_mlx *mlx);
+void			clear_map(void);
+void			clear_all(void);
+int				kill_all(void);
+void			ft_exit(char *msg, int exit_code);
 
 #endif

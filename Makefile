@@ -1,5 +1,5 @@
 #Compile Options
-NAME = cub3D
+NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -L/usr/X11R6/lib -lX11 -lXext -lm
@@ -18,7 +18,7 @@ SRC =	sources/main.c \
 		sources/movement/movement.c sources/movement/movement2.c \
 		sources/movement/rotation.c \
 		sources/init/utils.c sources/init/init.c \
-		sources/free/free.c \
+		sources/free/free.c sources/free/free2.c \
 #
 
 # Commands

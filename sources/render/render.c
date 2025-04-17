@@ -12,6 +12,19 @@
 
 #include "../../includes/cub3d.h"
 
+void	draw_line(double x, double y, t_pos dir)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < (game()->map->minimap_scale * 150))
+	{
+		my_mlx_pixel_put(game(), x, y, RED_P);
+		x += dir.x;
+		y += dir.y;
+	}
+}
+
 void	start_floors(void)
 {
 	int	i;

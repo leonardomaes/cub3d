@@ -21,7 +21,7 @@ static int	valid_move(double new_x, double new_y)
 	map_y = (int)new_y;
 	if (game()->map->map[map_y][map_x] == '1'
 		|| game()->map->map[map_y][map_x] == ' ')
-		return (printf("hit\n"), 0);
+		return (0);
 	return (1);
 }
 

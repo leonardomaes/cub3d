@@ -17,6 +17,84 @@ unsigned int	get_rgb(int r, int g, int b)
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
+int	have_textures(t_texture *t)
+{
+	int	size;
+
+	size = 0;
+	if (!t || !t->ea_path || !t->no_path || !t->so_path
+		|| !t->we_path || t->ceiling == 0 || t->floor == 0)
+		return (1);
+	size = ft_strlen(t->ea_path);
+	if (ft_strncmp(t->ea_path + (size - 4), ".xpm", 4) != 0)
+		return (1);
+	size = ft_strlen(t->no_path);
+	if (ft_strncmp(t->no_path + (size - 4), ".xpm", 4) != 0)
+		return (1);
+	size = ft_strlen(t->so_path);
+	if (ft_strncmp(t->so_path + (size - 4), ".xpm", 4) != 0)
+		return (1);
+	size = ft_strlen(t->we_path);
+	if (ft_strncmp(t->we_path + (size - 4), ".xpm", 4) != 0)
+		return (1);
+	return (0);
+}
+
+char	*get_split_line(const char *s)
+{
+	char	**buff;
+	char	*result;
+
+	result = NULL;
+	buff = ft_split(s, ' ');
+	if (!buff)
+		return (NULL);
+	result = ft_spacetrim(buff[0]);
+	if (result[0] == '\0')
+	{
+		free(result);
+		result = ft_strdup(buff[0]);
+	}
+	free_split(buff);
+	return (result);
+}
+
+int	check_valid_chars(char **content)
+{
+	int	j;
+
+	j = 1;
+	while (content[j])
+	{
+		if (is_map_line(content[j]) == 1)
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+int	check_floors(char **temp)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (temp[i])
+	{
+		j = 0;
+		while (temp[i][j])
+		{
+			if (ft_isdigit(temp[i][j]) == 0)
+				return (free_split(temp), 1);
+			j++;
+		}
+		i++;
+	}
+	if (i != 3)
+		return (free_split(temp), 1);
+	return (0);
+}
+
 /* 
 int	get_hexa_color(t_map *map, char *fc)
 {
