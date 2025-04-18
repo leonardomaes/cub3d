@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotation.c                                         :+:      :+:    :+:   */
+/*   rotation_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	rotate_key(int key)
 {
@@ -33,4 +33,33 @@ void	rotate_key(int key)
 	game()->player.dir.y = -sin(angle);
 	game()->player.plane.x = -game()->player.dir.y * FOV_ANGLE;
 	game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
+}
+
+int	handle_mouse_move(int x, int y, void *param)
+{
+	static int	prev_x;
+	int			delta;
+	double		angle;
+
+	(void)y;
+	(void)param;
+	prev_x = WINDOW_WIDTH / 2;
+	delta = x - prev_x;
+	if (delta != 0)
+	{
+		game()->player.rotation -= delta * MOUSE_SENSIBILITY;
+		if (game()->player.rotation < 1)
+			game()->player.rotation += 360;
+		else if (game()->player.rotation > 360)
+			game()->player.rotation -= 360;
+		angle = get_radian(game()->player.rotation);
+		game()->player.dir.x = cos(angle);
+		game()->player.dir.y = -sin(angle);
+		game()->player.plane.x = -game()->player.dir.y * FOV_ANGLE;
+		game()->player.plane.y = game()->player.dir.x * FOV_ANGLE;
+	}
+	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win,
+		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	prev_x = WINDOW_WIDTH / 2;
+	return (0);
 }

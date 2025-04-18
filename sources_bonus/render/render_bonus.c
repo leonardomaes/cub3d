@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	draw_line(double x, double y, t_pos dir)
 {
@@ -52,6 +52,7 @@ int	start_game(void)
 {
 	start_floors();
 	raycast(&game()->player);
+	start_minimap();
 	mlx_put_image_to_window(game()->mlx->mlx, game()->mlx->win,
 		game()->mlx->img, 0, 0);
 	return (0);

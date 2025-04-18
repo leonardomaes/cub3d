@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 /************************************************/
 /*					Includes					*/
@@ -244,6 +244,10 @@ int				start_game(void);
 void			load_texture(void);
 double			get_radian(int angle);
 
+// Minimap
+void			draw_square(int i, int j);
+void			start_minimap(void);
+
 //Raycast
 void			set_dda(t_ray *ray, t_player *player);
 void			perform_dda(t_ray *ray);
@@ -268,6 +272,7 @@ void			move_forward(void);
 
 // Rotation
 void			rotate_key(int key);
+int				handle_mouse_move(int x, int y, void *param);
 
 /*************************************************/
 /******************** FREE ***********************/

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 int	player(int flag)
 {
@@ -50,6 +50,11 @@ void	setup_hook(void)
 {
 	mlx_hook(game()->mlx->win, KeyPress, KeyPressMask, check_key, NULL);
 	mlx_hook(game()->mlx->win, DestroyNotify, 0, kill_all, NULL);
+	mlx_mouse_move(game()->mlx->mlx, game()->mlx->win,
+		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	mlx_hook(game()->mlx->win, MotionNotify,
+		PointerMotionMask, handle_mouse_move, NULL);
+	mlx_mouse_hide(game()->mlx->mlx, game()->mlx->win);
 	mlx_loop_hook(game()->mlx->mlx, &start_game, NULL);
 	mlx_loop(game()->mlx->mlx);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 int	count_lines(void)
 {
@@ -61,6 +61,44 @@ char	**read_lines(int lines)
 	close(fd);
 	return (map);
 }
+
+/* char	**read_lines(int lines)
+{
+	int		fd;
+	int		i;
+	char	**map;
+	char	*line;
+
+	map = (char **)malloc(sizeof(char *) * (lines + 1));
+	if (!map)
+		ft_exit("Error\nMemory allocation failed!\n", 1);
+	fd = open(game()->filename, O_RDONLY);
+	if (fd == -1)
+	{
+		free(map);
+		ft_exit("Error\nUnable to open file!\n", 1);
+	}
+	i = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		map[i] = ft_strdup(line);
+		free(line);
+		if (!map[i])
+		{
+			while (i-- > 0)
+				free(map[i]);
+			free(map);
+			close(fd);
+			ft_exit("Error\nMemory allocation failed!\n", 1);
+		}
+		i++;
+		line = get_next_line(fd);
+	}
+	map[i] = NULL;
+	close(fd);
+	return (map);
+} */
 
 void	read_map(void)
 {
