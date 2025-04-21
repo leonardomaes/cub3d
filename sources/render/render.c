@@ -6,7 +6,7 @@
 /*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:52:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/04/16 18:16:42 by rda-cunh         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:57:41 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	start_floors(void)
 		j = 0;
 		while (j <= WINDOW_WIDTH)
 		{
-			if (i > (WINDOW_HEIGHT / 2))
+			if (i < (WINDOW_HEIGHT / 2))
 				my_mlx_pixel_put(game(), j, i, game()->map->texture->ceiling);
 			else
 				my_mlx_pixel_put(game(), j, i, game()->map->texture->floor);

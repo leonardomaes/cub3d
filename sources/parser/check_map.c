@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 20:35:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/22 20:35:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/04/21 14:38:17 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,73 +41,80 @@ int	check_textures(t_map *map, char **content, int *i)
 	return (have_textures(map->texture));
 }
 
-int	check_top_bottom(char *line)
+// checks if it' a wall
+static int	is_wall(char c)
 {
-	int	j;
-
-	j = 0;
-	while (line[j] != '\0')
-	{
-		if (line[j] != '1' && !ft_isspace(line[j]))
-			return (1);
-		j++;
-	}
-	return (0);
+	return (c == '1');
 }
 
-int	check_player(char **content)
+int	check_top_bottom(char *line)
 {
-	int	player;
-	int	y;
-	int	x;
+	int	i;
 
-	player = 0;
-	y = 0;
-	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
-	{
-		x = 0;
-		while (content[y][x])
-		{
-			if (is_player(content[y][x]))
-			{
-				player++;
-				init_player(content[y][x], x, y);
-			}
-			x++;
-		}
-		y++;
-	}
-	if (player != 1)
+	if (!line)
 		return (1);
-	game()->map->max_y = y + 2;
+	i = 0;
+	// skip spaces
+	while (line[i] && line[i] == ' ')
+		i++;
+	// alll chars must be '1'
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] != '1' && line[i] != ' ')
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
 int	check_middle(char **content, int *j)
 {
-	int	x;
 	int	y;
-	int	max_width;
+	int	x;
+	int	first;
+	int	last;
 
-	y = 0;
-	max_width = 0;
-	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
+	y = *j;
+	while (content[y] && is_map_line(content[y]))
 	{
-		x = 0;
-		while (content[y][x])
+		// find first and last char in the line
+		first = 0;
+		while (content[y][first] && content[y][first] == ' ')
+			first++;
+		last = ft_strlen(content[y]) - 1;
+		while (last > first && content[y][last] == ' ')
+			last--;
+
+		// check that both are
+		if (!is_wall(content[y][first]) || !is_wall(content[y][last]))
+			return (1);
+
+		// check each cell for enclosure if it's a '0' or a player
+		x = first;
+		while (x <= last && (content[y][x] != '\n'))
 		{
-			if ((x == 0 && (content[y][x] != '1' && !ft_isspace(content[y][x])))
-				|| (content[y][x + 1] == '\n' && content[y][x] != '1')
-				|| (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1 || is_map(content[y + 1][x]) == 1)))
-				return (1);
+			if (content[y][x] == '0' || is_player(content[y][x]))
+			{
+				// check above
+				if (y == 0 || x >= (int)ft_strlen(content[y - 1]) ||
+					!is_map(content[y - 1][x]))
+					return (1);
+				// check below
+				if (!content[y + 1] || x >= (int)ft_strlen(content[y + 1]) ||
+					!is_map(content[y + 1][x]))
+					return (1);
+				// check left
+				if (x == 0 || !is_map(content[y][x - 1]))
+					return (1);
+				// check right
+				if (!content[y][x + 1] || !is_map(content[y][x + 1]))
+					return (1);
+			}
 			x++;
 		}
-		if (x > max_width)
-			max_width = x;
 		y++;
 	}
-	game()->map->max_x = max_width;
-	*j += y;
+	*j = y - 1;
 	return (0);
 }
 
@@ -116,19 +123,15 @@ int	check_map_conditions(char **content, int *i)
 	int	j;
 
 	j = *i;
-	if (check_top_bottom(content[j]) == 1)
+	// check top wall
+	if (check_top_bottom(content[j]))
 		return (1);
 	j++;
-	if (check_player(content + j) == 1)
+	// check middle rows
+	if (check_middle(content, &j))
 		return (1);
-	if (content[j][0] == '\n')
-		return (1);
-	if (check_middle(content + j, &j) == 1)
-		return (1);
-	if (check_top_bottom(content[j]) == 1)
-		return (1);
-	j++;
-	if (content[j])
+	// check bottom wall
+	if (check_top_bottom(content[j]))
 		return (1);
 	return (0);
 }
