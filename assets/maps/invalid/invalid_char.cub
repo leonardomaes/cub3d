@@ -1,7 +1,7 @@
-SO ./assets/textures/south_texture.png
-NO ./assets/textures/north_texture.png
-WE ./assets/textures/west_texture.png
-EA ./assets/textures/east_texture.png
+SO ./assets/textures/south_texture.xpm
+NO ./assets/textures/north_texture.xpm
+WE ./assets/textures/west_texture.xpm
+EA ./assets/textures/east_texture.xpm
 
 F 220,100,0
 C 225,30,0

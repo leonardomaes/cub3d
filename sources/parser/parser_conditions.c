@@ -51,9 +51,7 @@ char	*ft_mapdup(const char *s)
 	while (i < game()->map->max_x)
 	{
 		if (i < (int)ft_strlen(s))
-		{
 			dest[i] = s[i];
-		}
 		else
 			dest[i] = '\0';
 		i++;
@@ -72,10 +70,9 @@ int	get_map2(t_map	*map, char **content, int i)
 	j = 0;
 	while (content[i])
 	{
-		map->map[j] = ft_mapdup(content[i]);	// Talvez trocar este strdup para preencher até o max_x
+		map->map[j] = ft_mapdup(content[i]);
 		if (!map->map[j] || map->map[j] == NULL)
 			return (1);
-		//printf(">%s", map->map[j]);
 		j++;
 		i++;
 	}

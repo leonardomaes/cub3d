@@ -69,7 +69,6 @@ int	check_valid_chars(char **content)
 	max_width = 0;
 	while (content[y])
 	{
-		//printf("%s", content[y]);
 		x = 0;
 		if (is_map_line(content[y]) == 1)
 			return (1);
