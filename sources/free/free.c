@@ -61,7 +61,8 @@ void	clear_all(void)
 {
 	if (!game())
 		return ;
-	clear_mlx(game()->mlx);
+	if (game()->mlx)
+		clear_mlx(game()->mlx);
 	clear_map();
 }
 

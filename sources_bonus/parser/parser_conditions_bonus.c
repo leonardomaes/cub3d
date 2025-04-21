@@ -39,8 +39,8 @@ int	check_map(t_map *map, char	**content, int *i)
 
 char	*ft_mapdup(const char *s)
 {
-	char			*dest;
-	int	i;
+	char	*dest;
+	int		i;
 
 	if (!s || *s == '\n')
 		return (NULL);
@@ -94,5 +94,4 @@ void	parse_map(t_map *map, char	**content)
 		ft_exit("Error\nMissing textures or in wrong format\n", 1);
 	if (check_map(map, content, &i) == 1)
 		ft_exit("Error\nMap in wrong format\n", 1);
-	//get_map2(map, content, i);
 }

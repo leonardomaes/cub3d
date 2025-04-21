@@ -23,8 +23,9 @@ int	main(int argc, char *argv[])
 {
 	if (argc == 2)
 	{
-		init_mlx(game(), argv[1]);
+		game()->filename = (char *)argv[1];
 		file_check();
+		init_mlx(game(), argv[1]);
 		load_texture();
 		setup_hook();
 	}

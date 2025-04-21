@@ -38,7 +38,7 @@ void	start_floors(void)
 		j = 0;
 		while (j <= WINDOW_WIDTH)
 		{
-			if (i > (WINDOW_HEIGHT / 2))
+			if (i < (WINDOW_HEIGHT / 2))
 				my_mlx_pixel_put(game(), j, i, game()->map->texture->ceiling);
 			else
 				my_mlx_pixel_put(game(), j, i, game()->map->texture->floor);

@@ -96,7 +96,9 @@ int	check_middle(char **content, int *j)
 		{
 			if ((x == 0 && (content[y][x] != '1' && !ft_isspace(content[y][x])))
 				|| (content[y][x + 1] == '\n' && content[y][x] != '1')
-				|| (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1 || is_map(content[y + 1][x]) == 1)))
+				|| (content[y][x] == '0' &&
+				(is_map(content[y -1][x]) == 1
+					|| is_map(content[y +1][x]) == 1)))
 				return (1);
 			x++;
 		}

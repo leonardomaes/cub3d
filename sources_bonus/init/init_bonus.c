@@ -25,7 +25,6 @@ void	init_mlx(t_cub *cub, const char *filename)
 		free(cub->mlx);
 		exit (1);
 	}
-	cub->filename = (char *)filename;
 	title = ft_strjoin("cub3D - ", filename);
 	cub->mlx->win = mlx_new_window(cub->mlx->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, title);
