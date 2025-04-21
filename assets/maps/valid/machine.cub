@@ -3,8 +3,8 @@ NO ./assets/textures/machine02.xpm
 WE ./assets/textures/machine03.xpm
 EA ./assets/textures/oak_timber.xpm
 
-F 186,135,89
-C 80,80,4
+F 80,80,4
+C 186,135,89
 
 1111111111111111111111111
 1000000000110000000000001

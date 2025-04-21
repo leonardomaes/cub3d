@@ -3,8 +3,8 @@ NO ./assets/textures/brick_wall01.xpm
 WE ./assets/textures/brick_wall03.xpm
 EA ./assets/textures/brick_wall01.xpm
 
-F 133,187,101
-C 76,115,76
+F 76,115,76
+C 133,187,101
 
 1111111111111111111111111
 1000000000110000000000001
