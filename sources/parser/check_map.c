@@ -87,10 +87,8 @@ int	check_middle(char **content, int *j)
 {
 	int	x;
 	int	y;
-	int	max_width;
 
 	y = 0;
-	max_width = 0;
 	while (is_map_line(content[y + 1]) == 0 && content[y + 1][0] != '\n')
 	{
 		x = 0;
@@ -102,20 +100,17 @@ int	check_middle(char **content, int *j)
 				return (1);
 			x++;
 		}
-		if (x > max_width)
-			max_width = x;
 		y++;
 	}
-	game()->map->max_x = max_width;
 	*j += y;
 	return (0);
 }
 
-int	check_map_conditions(char **content, int *i)
+int	check_map_conditions(t_map *map, char **content, int i)
 {
 	int	j;
 
-	j = *i;
+	j = i;
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
@@ -123,7 +118,9 @@ int	check_map_conditions(char **content, int *i)
 		return (1);
 	if (content[j][0] == '\n')
 		return (1);
-	if (check_middle(content + j, &j) == 1)
+	if (get_map2(map, content, j - 1) == 1)
+		return (1);
+	if (check_middle(map->map + 1, &j) == 1)
 		return (1);
 	if (check_top_bottom(content[j]) == 1)
 		return (1);

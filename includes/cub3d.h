@@ -202,12 +202,12 @@ int				count_lines(void);
 int				check_textures(t_map *map, char **content, int *i);
 int				check_top_bottom(char *line);
 int				check_middle(char **content, int *j);
-int				check_map_conditions(char **content, int *i);
+int				check_map_conditions(t_map *map, char **content, int i);
 
 // Parser Conditions
 void			init_map(t_map *map);
-int				check_map(char	**content, int *i);
-void			get_map2(t_map	*map, char **content, int i);
+int				check_map(t_map *map, char	**content, int *i);
+int				get_map2(t_map	*map, char **content, int i);
 void			parse_map(t_map *map, char	**content);
 
 // Parser Utils

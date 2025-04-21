@@ -61,15 +61,25 @@ char	*get_split_line(const char *s)
 
 int	check_valid_chars(char **content)
 {
-	int	j;
+	int	y;
+	int	x;
+	int	max_width;
 
-	j = 1;
-	while (content[j])
+	y = 0;
+	max_width = 0;
+	while (content[y])
 	{
-		if (is_map_line(content[j]) == 1)
+		//printf("%s", content[y]);
+		x = 0;
+		if (is_map_line(content[y]) == 1)
 			return (1);
-		j++;
+		while (content[y][x])
+			x++;
+		if (x > max_width)
+			max_width = x;
+		y++;
 	}
+	game()->map->max_x = max_width;
 	return (0);
 }
 

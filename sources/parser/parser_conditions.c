@@ -28,39 +28,61 @@ void	init_map(t_map *map)
 	map->map = NULL;
 }
 
-int	check_map(char	**content, int *i)
+int	check_map(t_map *map, char	**content, int *i)
 {
 	if (check_valid_chars(content + (*i)) == 1)
 		return (1);
-	if (check_map_conditions(content, i) == 1)
+	if (check_map_conditions(map, content, *i) == 1)
 		return (1);
 	return (0);
 }
 
-void	get_map2(t_map	*map, char **content, int i)
+char	*ft_mapdup(const char *s)
+{
+	char			*dest;
+	int	i;
+
+	if (!s || *s == '\n')
+		return (NULL);
+	dest = (char *)malloc(game()->map->max_x + 1);
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (i < game()->map->max_x)
+	{
+		if (i < (int)ft_strlen(s))
+		{
+			dest[i] = s[i];
+		}
+		else
+			dest[i] = '\0';
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+int	get_map2(t_map	*map, char **content, int i)
 {
 	int	j;
 
 	map->map = (char **)malloc(sizeof(char *) * (game()->map->max_y + 1));
 	if (!map->map)
-		return ;
+		return (1);
 	j = 0;
 	while (content[i])
 	{
-		map->map[j] = ft_strdup(content[i]);
-		if (!map->map[j])
-		{
-			while (j > 0)
-				free(map->map[--j]);
-			free(map->map);
-			return ;
-		}
+		map->map[j] = ft_mapdup(content[i]);	// Talvez trocar este strdup para preencher até o max_x
+		if (!map->map[j] || map->map[j] == NULL)
+			return (1);
+		//printf(">%s", map->map[j]);
 		j++;
 		i++;
 	}
 	map->map[j] = NULL;
 	map->offset_x = WINDOW_WIDTH / map->max_x;
 	map->offset_y = WINDOW_HEIGHT / map->max_y;
+	return (0);
 }
 
 void	parse_map(t_map *map, char	**content)
@@ -73,7 +95,7 @@ void	parse_map(t_map *map, char	**content)
 	init_map(game()->map);
 	if (check_textures(map, content, &i) == 1)
 		ft_exit("Error\nMissing textures or in wrong format\n", 1);
-	if (check_map(content, &i) == 1)
+	if (check_map(map, content, &i) == 1)
 		ft_exit("Error\nMap in wrong format\n", 1);
-	get_map2(map, content, i);
+	//get_map2(map, content, i);
 }
