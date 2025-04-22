@@ -36,7 +36,7 @@ int	is_player(char c)
 int	is_map(char c)
 {
 	if (c == '0' || c == '1' || c == 'N'
-		|| c == 'E' || c == 'S' || c == 'W' || c == ' ')
+		|| c == 'E' || c == 'S' || c == 'W')
 		return (0);
 	return (1);
 }
