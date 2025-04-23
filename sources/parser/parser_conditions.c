@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_conditions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaes <lmaes@student.42porto.com>          +#+  +:+       +#+        */
+/*   By: rda-cunh <rda-cunh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:35:08 by lmaes             #+#    #+#             */
-/*   Updated: 2025/03/12 19:35:10 by lmaes            ###   ########.fr       */
+/*   Updated: 2025/04/23 02:16:43 by rda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,31 @@ void	get_map2(t_map	*map, char **content, int i)
 	map->offset_y = WINDOW_HEIGHT / map->max_y;
 }
 
+static void	set_map_dimensions(char **content, int start)
+{
+	int	y;
+	int	max_x;
+	int	len;
+
+	y = start;
+	max_x = 0;
+	// count the map rows and find the width
+	while (content[y])
+	{
+		if (is_map_line(content[y]) != 0 || content[y][0] == '\n')
+			break ;
+		len = ft_strlen(content[y]);
+		// remove potential new line from length
+		if (len > 0 && content[y][len - 1] == '\n')
+			len--;
+		if (len > max_x)
+			max_x = len;
+		y++;
+	}
+	game()->map->max_y = y - start;
+	game()->map->max_x = max_x;
+}
+
 void	parse_map(t_map *map, char	**content)
 {
 	int	i;
@@ -75,5 +100,7 @@ void	parse_map(t_map *map, char	**content)
 		ft_exit("Error\nMissing textures or in wrong format\n", 1);
 	if (check_map(content, &i) == 1)
 		ft_exit("Error\nMap in wrong format\n", 1);
+	set_map_dimensions(content, i);
+	printf("Map dimensions: max_y=%d, max_x=%d\n", game()->map->max_y, game()->map->max_x);
 	get_map2(map, content, i);
 }
