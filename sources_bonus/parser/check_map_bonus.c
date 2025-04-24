@@ -95,9 +95,13 @@ int	check_middle(char **content, int *j)
 		while (content[y][x])
 		{
 			if ((x == 0 && (content[y][x] != '1' && !ft_isspace(content[y][x])))
-				|| (content[y][x + 1] == '\n' && content[y][x] != '1')
-				|| (content[y][x] == '0' && (is_map(content[y - 1][x]) == 1
-				|| is_map(content[y + 1][x]) == 1)))
+			|| (content[y][x + 1] == '\n' && (content[y][x] != '1'
+				&& !ft_isspace(content[y][x])))
+			|| ((content[y][x] == '0' || is_player(content[y][x])) &&
+			(is_map(content[y -1][x]) == 1
+				|| is_map(content[y +1][x]) == 1
+				|| (x > 0 && is_map(content[y][x - 1]) == 1)
+				|| (content[y][x + 1] && is_map(content[y][x + 1]) == 1))))
 				return (1);
 			x++;
 		}
