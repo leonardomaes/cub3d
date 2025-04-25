@@ -35,7 +35,10 @@ t_mlx	init_tex(char *path)
 	tex.img = mlx_xpm_file_to_image(game()->mlx->mlx, path,
 			&game()->map->texture->width, &game()->map->texture->height);
 	if (!tex.img)
+	{
+		tex.img = NULL;
 		return (tex);
+	}
 	tex.addr = mlx_get_data_addr(tex.img, &tex.bits_per_pixel,
 			&tex.line_length, &tex.endian);
 	return (tex);

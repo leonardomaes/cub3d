@@ -116,6 +116,8 @@ int	check_map_conditions(t_map *map, char **content, int i)
 	int	j;
 
 	j = i;
+	if (!content[j])
+		return (1);
 	if (check_top_bottom(content[j]) == 1)
 		return (1);
 	j++;
