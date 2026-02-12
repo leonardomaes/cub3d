@@ -271,14 +271,6 @@ kcachegrind callgrind.out.<pid>
 
 This project was developed in collaboration with [Ricardo Mendes](https://github.com/rda-cunh) as part of the 42 Porto curriculum.
 
-## 🎓 Academic Integrity
-
-This is an educational project. Please respect 42 School's academic policies and do not copy this code if you are currently a student working on the same project.
-
-## 📝 License
-
-This project is part of the 42 School curriculum and follows their academic policies.
-
 ---
 
 **42 Porto** | [Leonardo Maes](https://linkedin.com/in/leonardo-maes)
